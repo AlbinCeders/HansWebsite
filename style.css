@@ -11,7 +11,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: Inter, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.25;
   -webkit-font-smoothing: antialiased;
@@ -55,7 +55,7 @@ a:hover { opacity: .58; }
   font-size: clamp(40px, 8vw, 118px);
   line-height: .88;
   letter-spacing: -0.07em;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .intro p { margin: 0 0 4px; color: var(--muted); }
@@ -107,7 +107,7 @@ a:hover { opacity: .58; }
 .info-copy {
   grid-column: 2;
   max-width: 900px;
-  margin: 0 0 18px;
+  margin: 0;
   font-size: clamp(28px, 4vw, 58px);
   line-height: 1;
   letter-spacing: -0.045em;
