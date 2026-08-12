@@ -340,3 +340,31 @@ a:hover {
     width: clamp(110px, 34vw, 180px);
   }
 }
+
+
+/* HANS V6 — centered logo-only hero */
+.hero {
+  position: relative;
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-logo {
+  display: block;
+  width: clamp(150px, 17vw, 250px);
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .hero {
+    min-height: calc(100svh - 52px);
+  }
+
+  .hero-logo {
+    width: clamp(125px, 38vw, 180px);
+  }
+}
