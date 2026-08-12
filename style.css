@@ -441,3 +441,46 @@ a:hover {
     width: clamp(220px, 68vw, 360px);
   }
 }
+
+
+/* HANS V13 — full-screen landing with header retained */
+.site-header {
+  position: relative;
+  z-index: 10;
+}
+
+.intro.intro-logo {
+  box-sizing: border-box;
+  min-height: calc(100svh - 56px);
+  height: calc(100svh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--page-x);
+  border-bottom: 1px solid var(--line);
+}
+
+.intro.intro-logo .hero-logo {
+  display: block;
+  width: clamp(420px, 48vw, 760px);
+  max-width: 80vw;
+  height: auto;
+  margin: 0;
+}
+
+.intro.intro-logo > p {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .intro.intro-logo {
+    min-height: calc(100svh - 52px);
+    height: calc(100svh - 52px);
+    padding: 0 var(--page-x);
+  }
+
+  .intro.intro-logo .hero-logo {
+    width: min(76vw, 430px);
+    max-width: 76vw;
+  }
+}
