@@ -484,3 +484,64 @@ a:hover {
     max-width: 76vw;
   }
 }
+
+
+/* HANS V14 — clean full-screen landing, no Work visible in first viewport */
+html,
+body {
+  background: #f4f3ef;
+}
+
+.site-header {
+  position: relative;
+  z-index: 20;
+  background: #f4f3ef;
+}
+
+.intro.intro-logo {
+  box-sizing: border-box;
+  min-height: calc(100svh - 56px);
+  height: calc(100svh - 56px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--page-x);
+  margin: 0;
+  background: #f4f3ef;
+  border-bottom: 0;
+}
+
+.intro.intro-logo .hero-logo {
+  display: block;
+  width: min(66vw, 980px);
+  max-width: 86vw;
+  height: auto;
+  margin: 0;
+  object-fit: contain;
+}
+
+.intro.intro-logo > p {
+  display: none !important;
+}
+
+/* Push Work entirely below the fold */
+#work,
+.work-section,
+.work-grid,
+.projects {
+  scroll-margin-top: 56px;
+}
+
+@media (max-width: 760px) {
+  .intro.intro-logo {
+    min-height: calc(100svh - 52px);
+    height: calc(100svh - 52px);
+    padding: 0 var(--page-x);
+  }
+
+  .intro.intro-logo .hero-logo {
+    width: min(82vw, 620px);
+    max-width: 82vw;
+  }
+}
