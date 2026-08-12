@@ -368,3 +368,52 @@ a:hover {
     width: clamp(125px, 38vw, 180px);
   }
 }
+
+
+/* HANS V8 — fix actual intro-logo placement */
+.intro.intro-logo {
+  position: relative;
+  min-height: 58vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px var(--page-x) 13px;
+  border-bottom: 1px solid var(--line);
+}
+
+.intro.intro-logo .hero-logo {
+  display: block;
+  width: clamp(145px, 16vw, 235px);
+  max-width: 100%;
+  max-height: none;
+  height: auto;
+  margin: 0;
+  object-fit: contain;
+  object-position: center;
+}
+
+.intro.intro-logo > p {
+  position: absolute;
+  right: var(--page-x);
+  bottom: 13px;
+  margin: 0;
+  justify-self: auto;
+}
+
+@media (max-width: 760px) {
+  .intro.intro-logo {
+    min-height: 52vh;
+    display: flex;
+    padding: 18px var(--page-x) 11px;
+  }
+
+  .intro.intro-logo .hero-logo {
+    width: clamp(125px, 38vw, 175px);
+  }
+
+  .intro.intro-logo > p {
+    right: var(--page-x);
+    bottom: 11px;
+    margin: 0;
+  }
+}
