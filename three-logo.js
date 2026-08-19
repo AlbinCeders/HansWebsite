@@ -5,7 +5,7 @@ import { DRACOLoader } from './assets/vendor/DRACOLoader.js';
 const host = document.querySelector('.hero-logo-3d');
 const canvas = host?.querySelector('.logo-canvas');
 
-if (host && canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (host && canvas) {
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
