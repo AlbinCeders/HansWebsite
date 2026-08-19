@@ -79,13 +79,13 @@ a:hover {
 }
 
 .hero-logo-3d {
-  --logo-width: min(72vw, 980px);
+  --logo-width: min(66vw, 980px);
   position: relative;
   width: var(--logo-width);
   aspect-ratio: 1000 / 563;
   transform-style: preserve-3d;
-  perspective: 1200px;
-  animation: logo-orbit 15s cubic-bezier(.42, 0, .58, 1) infinite;
+  perspective: 1600px;
+  animation: logo-spin 20s linear infinite;
   will-change: transform;
 }
 
@@ -94,8 +94,15 @@ a:hover {
   position: absolute;
   inset: 0;
   display: block;
-  -webkit-mask: url("assets/hans-logo.svg") center / contain no-repeat;
-  mask: url("assets/hans-logo.svg") center / contain no-repeat;
+  -webkit-mask-image: url("assets/hans-logo.svg");
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-image: url("assets/hans-logo.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  backface-visibility: visible;
 }
 
 .logo-depth {
@@ -104,22 +111,29 @@ a:hover {
 
 .logo-depth i {
   transform: translateZ(calc(var(--z) * -1px));
-  background: linear-gradient(130deg, #6d6962 0%, #c8c4ba 42%, #77736d 100%);
+  background: linear-gradient(90deg, #5c5a56 0%, #8f8c85 35%, #5e5b56 100%);
 }
 
 .logo-face {
-  transform: translateZ(1px);
-  background: linear-gradient(112deg, #7c7972 0%, #f2f0ea 19%, #9c9992 38%, #f8f6ee 57%, #77736d 78%, #dedbd2 100%);
-  filter: drop-shadow(0 16px 16px rgba(31, 29, 25, .12));
+  transform: translateZ(2px);
+  background: linear-gradient(105deg,
+    #706e69 0%,
+    #e6e3db 16%,
+    #a5a29b 31%,
+    #fbfaf5 47%,
+    #8b8882 61%,
+    #f0eee7 77%,
+    #74716b 100%);
+  filter: drop-shadow(0 12px 20px rgba(31, 29, 25, .12));
 }
 
 .hero-logo-3d.is-paused {
   animation-play-state: paused;
 }
 
-@keyframes logo-orbit {
-  0%, 100% { transform: rotateX(-5deg) rotateY(-24deg) rotateZ(-1deg); }
-  50% { transform: rotateX(5deg) rotateY(26deg) rotateZ(1deg); }
+@keyframes logo-spin {
+  from { transform: rotateX(-5deg) rotateY(0deg); }
+  to { transform: rotateX(-5deg) rotateY(360deg); }
 }
 
 .intro p {
