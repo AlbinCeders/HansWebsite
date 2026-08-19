@@ -1,7 +1,7 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
 document.querySelectorAll('.project-hover-video').forEach((video) => {
-  const project = video.closest('.project');
+  const project = video.closest('.project, .featured-project');
 
   project.addEventListener('mouseenter', () => {
     video.play().catch(() => {});
