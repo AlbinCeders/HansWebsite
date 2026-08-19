@@ -82,25 +82,30 @@ a:hover {
   --logo-width: min(66vw, 980px);
   position: relative;
   width: var(--logo-width);
-  aspect-ratio: 1040 / 500;
-  perspective: 1500px;
+  aspect-ratio: 1000 / 563;
 }
 
-.logo-metal-render {
+.logo-canvas,
+.logo-fallback {
   position: absolute;
   inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  animation: logo-turn 18s linear infinite;
-  transform-style: preserve-3d;
-  will-change: transform;
 }
 
-@keyframes logo-turn {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
+.logo-canvas {
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+
+.hero-logo-3d.is-loaded .logo-canvas {
+  opacity: 1;
+}
+
+.hero-logo-3d.is-loaded .logo-fallback {
+  opacity: 0;
 }
 
 .intro p {
