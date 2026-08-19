@@ -28,7 +28,7 @@ if (host && canvas) {
   loader.setDRACOLoader(draco);
 
   let logo;
-  loader.load('./assets/hans-3d-canary.glb', (gltf) => {
+  loader.load('./assets/hans-logo-3d.glb', (gltf) => {
     logo = gltf.scene;
     logo.rotation.x = -0.1;
     scene.add(logo);
