@@ -14,11 +14,11 @@ if (host && canvas) {
   const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
   camera.position.set(0, 0, 19);
 
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x77736d, 2.8));
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x9e9a91, 4.8));
   const key = new THREE.DirectionalLight(0xffffff, 3.2);
   key.position.set(4, 7, 8);
   scene.add(key);
-  const fill = new THREE.DirectionalLight(0xd8d3c9, 2);
+  const fill = new THREE.DirectionalLight(0xf6f3eb, 3.4);
   fill.position.set(-6, -2, 5);
   scene.add(fill);
 
@@ -30,7 +30,14 @@ if (host && canvas) {
   let logo;
   loader.load('./assets/hans-logo-3d.glb', (gltf) => {
     logo = gltf.scene;
-    logo.rotation.x = -0.1;
+    logo.traverse((object) => {
+      if (object.isMesh && object.material) {
+        object.material.color.set(0xe0ddd5);
+        object.material.metalness = 0.62;
+        object.material.roughness = 0.26;
+      }
+    });
+    logo.rotation.x = -0.08;
     scene.add(logo);
     host.classList.add('is-loaded');
   });
