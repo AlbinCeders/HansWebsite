@@ -52,6 +52,7 @@ a:hover { opacity: .58; }
 .info-section { display: grid; grid-template-columns: 1fr 1fr; gap: 0; min-height: 67vh; padding: 12px 5.1vw 80px; }
 .info-kicker { margin: 0; font-size: clamp(14px, 1vw, 20px); }
 .info-copy { max-width: 650px; margin: 0; font-size: clamp(19px, 1.45vw, 28px); line-height: .97; letter-spacing: -.025em; }
+.info-first-sentence { white-space: nowrap; }
 .site-footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 14px 5.1vw 20px; font-size: 11px; }
 .site-footer p { margin: 0 0 3px; }
 .footer-right { display: flex; gap: 15px; align-items: flex-start; }
@@ -74,5 +75,6 @@ a:hover { opacity: .58; }
   .info-section { display: block; min-height: 66vh; padding: 10px 5vw 70px; }
   .info-kicker { margin-bottom: 28px; font-size: 14px; }
   .info-copy { max-width: 100%; font-size: 22px; line-height: .98; letter-spacing: -.02em; }
+  .info-first-sentence { white-space: normal; }
   .site-footer { font-size: 10px; }
 }
