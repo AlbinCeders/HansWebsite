@@ -21,14 +21,14 @@ a { color: inherit; text-decoration: none; }
 a:hover { opacity: .58; }
 
 .site-header { position: absolute; inset: 0 0 auto; z-index: 10; display: flex; align-items: flex-start; justify-content: space-between; padding: 21px 5.1vw; background: transparent; }
-.brand { display: block; width: clamp(132px, 10vw, 190px); line-height: 0; }
+.brand { display: block; width: clamp(112px, 7.5vw, 142px); line-height: 0; }
 .brand img { display: block; width: 100%; height: auto; }
 .nav { display: flex; gap: clamp(42px, 6.4vw, 122px); }
 .nav a { font-family: var(--font-inter); font-size: clamp(16px, 1.43vw, 27px); font-weight: 900; line-height: normal; letter-spacing: 0; }
 
 .featured-project { padding: clamp(315px, 28.7vw, 545px) 6.8vw clamp(100px, 12vw, 190px); }
 .featured-link { display: block; }
-.featured-media { width: 100%; aspect-ratio: 1.5 / 1; background: linear-gradient(125deg, #dfe274 0%, #eef0a5 28%, #a8c256 50%, #ebd44d 74%, #d6c648 100%); position: relative; overflow: hidden; }
+.featured-media { width: 80%; margin: 0 auto; aspect-ratio: 1.5 / 1; background: linear-gradient(125deg, #dfe274 0%, #eef0a5 28%, #a8c256 50%, #ebd44d 74%, #d6c648 100%); position: relative; overflow: hidden; }
 .featured-media::before { content: "FEATURED PROJECT"; position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); color: rgba(0, 0, 0, .48); font-family: var(--font-inter); font-size: clamp(12px, 1.25vw, 22px); font-weight: 900; letter-spacing: 0; }
 .featured-media::after { content: ""; position: absolute; inset: 7%; border: 1px solid rgba(0, 0, 0, .22); }
 
@@ -51,7 +51,7 @@ a:hover { opacity: .58; }
 
 .info-section { display: grid; grid-template-columns: 1fr 1fr; gap: 0; min-height: 67vh; padding: 12px 5.1vw 80px; }
 .info-kicker { margin: 0; font-size: clamp(14px, 1vw, 20px); }
-.info-copy { max-width: 710px; margin: 0; font-size: clamp(24px, 2vw, 38px); line-height: 1.03; letter-spacing: 0; }
+.info-copy { max-width: 650px; margin: 0; font-size: clamp(21px, 1.7vw, 32px); line-height: .97; letter-spacing: -.025em; }
 .site-footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 14px 5.1vw 20px; font-size: 11px; }
 .site-footer p { margin: 0 0 3px; }
 .footer-right { display: flex; gap: 15px; align-items: flex-start; }
@@ -59,11 +59,11 @@ a:hover { opacity: .58; }
 @media (max-width: 760px) {
   :root { --page-x: 10px; }
   .site-header { padding: 13px 5vw; }
-  .brand { width: 105px; }
+  .brand { width: 82px; }
   .nav { gap: 19px; }
   .nav a { font-size: 14px; }
   .featured-project { padding: 190px 5vw 82px; }
-  .featured-media { aspect-ratio: 1 / 1.18; }
+  .featured-media { width: 88%; aspect-ratio: 1 / 1.18; }
   .work-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 74px 8px; padding: 0 5vw 98px; }
   .project-one { grid-column: 1 / -1; }
   .project-two { grid-column: 2 / -1; margin-top: 50px; }
@@ -73,6 +73,6 @@ a:hover { opacity: .58; }
   .meta h2, .meta p, .meta span { font-size: 10px; }
   .info-section { display: block; min-height: 66vh; padding: 10px 5vw 70px; }
   .info-kicker { margin-bottom: 28px; font-size: 14px; }
-  .info-copy { max-width: 100%; font-size: 27px; line-height: 1.04; }
+  .info-copy { max-width: 100%; font-size: 24px; line-height: .98; letter-spacing: -.02em; }
   .site-footer { font-size: 10px; }
 }
