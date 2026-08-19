@@ -110,21 +110,14 @@ a:hover {
 }
 
 .logo-depth i {
-  transform: translateZ(calc(var(--z) * -1px));
-  background: linear-gradient(90deg, #5c5a56 0%, #8f8c85 35%, #5e5b56 100%);
+  transform: translateZ(calc(var(--z) * -4px));
+  background: #8e8b84;
 }
 
 .logo-face {
-  transform: translateZ(2px);
-  background: linear-gradient(105deg,
-    #706e69 0%,
-    #e6e3db 16%,
-    #a5a29b 31%,
-    #fbfaf5 47%,
-    #8b8882 61%,
-    #f0eee7 77%,
-    #74716b 100%);
-  filter: drop-shadow(0 12px 20px rgba(31, 29, 25, .12));
+  transform: translateZ(3px);
+  background: linear-gradient(180deg, #d1cec6 0%, #aaa79f 100%);
+  filter: drop-shadow(0 13px 17px rgba(31, 29, 25, .10));
 }
 
 .hero-logo-3d.is-paused {
