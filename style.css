@@ -84,7 +84,6 @@ a:hover {
   width: var(--logo-width);
   aspect-ratio: 1000 / 563;
   transform-style: preserve-3d;
-  perspective: 1600px;
   animation: logo-spin 20s linear infinite;
   will-change: transform;
 }
@@ -110,7 +109,7 @@ a:hover {
 }
 
 .logo-depth i {
-  transform: translateZ(calc(var(--z) * -2px));
+  transform: translateZ(calc(var(--z) * -3px));
   background: linear-gradient(180deg, #77756f 0%, #a8a59e 45%, #7f7c75 100%);
 }
 
@@ -125,8 +124,8 @@ a:hover {
 }
 
 @keyframes logo-spin {
-  from { transform: rotateX(-5deg) rotateY(0deg); }
-  to { transform: rotateX(-5deg) rotateY(360deg); }
+  from { transform: perspective(1300px) rotateX(-5deg) rotateY(0deg); }
+  to { transform: perspective(1300px) rotateX(-5deg) rotateY(360deg); }
 }
 
 .intro p {

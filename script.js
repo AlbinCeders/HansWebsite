@@ -5,7 +5,7 @@ const logoDepth = logo?.querySelector('.logo-depth');
 
 if (logoDepth) {
   const layers = document.createDocumentFragment();
-  for (let depth = 0; depth <= 68; depth += 1) {
+  for (let depth = 0; depth <= 92; depth += 1) {
     const layer = document.createElement('i');
     layer.style.setProperty('--z', depth);
     layers.appendChild(layer);
