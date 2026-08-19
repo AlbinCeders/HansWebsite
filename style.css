@@ -110,13 +110,13 @@ a:hover {
 }
 
 .logo-depth i {
-  transform: translateZ(calc(var(--z) * -4px));
-  background: #8e8b84;
+  transform: translateZ(calc(var(--z) * -2px));
+  background: linear-gradient(180deg, #77756f 0%, #a8a59e 45%, #7f7c75 100%);
 }
 
 .logo-face {
   transform: translateZ(3px);
-  background: linear-gradient(180deg, #d1cec6 0%, #aaa79f 100%);
+  background: linear-gradient(180deg, #d7d4cc 0%, #b4b1a9 100%);
   filter: drop-shadow(0 13px 17px rgba(31, 29, 25, .10));
 }
 
