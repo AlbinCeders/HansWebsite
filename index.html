@@ -19,13 +19,13 @@
 
   <main id="top">
     <section id="work" class="featured-project" aria-label="Featured work">
-      <a href="#" class="featured-link" aria-label="Featured project">
+      <button class="featured-link" type="button" aria-label="Watch featured project" data-video-modal-open>
         <div class="featured-media">
           <video class="project-hover-video" muted loop playsinline preload="auto" aria-label="Featured project preview">
             <source src="assets/work/project-01-hover.mp4" type="video/mp4" />
           </video>
         </div>
-      </a>
+      </button>
     </section>
 
     <section class="work-grid" aria-label="Selected work">
@@ -87,6 +87,13 @@
       <p class="info-copy"><span class="info-first-sentence">HANS is a global creative audio agency creating sound and music.</span><br>We offer sound design, original music, music production, sound identity and sonic logos, mixing and mastering.<br><br>Let’s make something sound great!<br><br><a href="mailto:hello@hansworks.co">hello@hansworks.co</a></p>
     </section>
   </main>
+
+  <div class="video-modal" hidden data-video-modal>
+    <button class="video-modal-close" type="button" aria-label="Close film" data-video-modal-close>Close</button>
+    <video class="video-modal-player" controls playsinline data-video-modal-player>
+      <source src="assets/work/project-01-hover.mp4" type="video/mp4" />
+    </video>
+  </div>
 
   <footer id="contact" class="site-footer">
     <div>
