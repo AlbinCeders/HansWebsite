@@ -78,12 +78,48 @@ a:hover {
   border-bottom: 1px solid var(--line);
 }
 
-.hero-logo {
+.hero-logo-3d {
+  --logo-width: min(72vw, 980px);
+  position: relative;
+  width: var(--logo-width);
+  aspect-ratio: 1000 / 563;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  animation: logo-orbit 15s cubic-bezier(.42, 0, .58, 1) infinite;
+  will-change: transform;
+}
+
+.hero-logo-3d span,
+.hero-logo-3d i {
+  position: absolute;
+  inset: 0;
   display: block;
-  width: min(72vw, 980px);
-  max-height: 28vh;
-  object-fit: contain;
-  object-position: left bottom;
+  -webkit-mask: url("assets/hans-logo.svg") center / contain no-repeat;
+  mask: url("assets/hans-logo.svg") center / contain no-repeat;
+}
+
+.logo-depth {
+  transform-style: preserve-3d;
+}
+
+.logo-depth i {
+  transform: translateZ(calc(var(--z) * -1px));
+  background: linear-gradient(130deg, #6d6962 0%, #c8c4ba 42%, #77736d 100%);
+}
+
+.logo-face {
+  transform: translateZ(1px);
+  background: linear-gradient(112deg, #7c7972 0%, #f2f0ea 19%, #9c9992 38%, #f8f6ee 57%, #77736d 78%, #dedbd2 100%);
+  filter: drop-shadow(0 16px 16px rgba(31, 29, 25, .12));
+}
+
+.hero-logo-3d.is-paused {
+  animation-play-state: paused;
+}
+
+@keyframes logo-orbit {
+  0%, 100% { transform: rotateX(-5deg) rotateY(-24deg) rotateZ(-1deg); }
+  50% { transform: rotateX(5deg) rotateY(26deg) rotateZ(1deg); }
 }
 
 .intro p {
@@ -254,9 +290,8 @@ a:hover {
     padding-bottom: 11px;
   }
 
-  .hero-logo {
-    width: 86vw;
-    max-height: 21vh;
+  .hero-logo-3d {
+    --logo-width: 86vw;
   }
 
   .intro p {
@@ -320,43 +355,11 @@ a:hover {
 }
 
 
-/* HANS V5 — centered, reduced hero logo */
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-logo {
-  display: block;
-  width: clamp(120px, 18vw, 260px);
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-@media (max-width: 700px) {
-  .hero-logo {
-    width: clamp(110px, 34vw, 180px);
+@media (prefers-reduced-motion: reduce) {
+  .hero-logo-3d {
+    animation: none;
+    transform: rotateX(-4deg) rotateY(-12deg);
   }
-}
-
-
-/* HANS V6 — centered logo-only hero */
-.hero {
-  position: relative;
-  min-height: calc(100vh - 56px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-logo {
-  display: block;
-  width: clamp(150px, 17vw, 250px);
-  max-width: 100%;
-  height: auto;
-  margin: 0;
 }
 
 @media (max-width: 700px) {
