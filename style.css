@@ -83,49 +83,28 @@ a:hover {
   position: relative;
   width: var(--logo-width);
   aspect-ratio: 1000 / 563;
-  transform-style: preserve-3d;
-  animation: logo-spin 20s linear infinite;
-  will-change: transform;
 }
 
-.hero-logo-3d span,
-.hero-logo-3d i {
+.logo-canvas,
+.logo-fallback {
   position: absolute;
   inset: 0;
   display: block;
-  -webkit-mask-image: url("assets/hans-logo.svg");
-  -webkit-mask-position: center;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-size: contain;
-  mask-image: url("assets/hans-logo.svg");
-  mask-position: center;
-  mask-repeat: no-repeat;
-  mask-size: contain;
-  backface-visibility: visible;
+  width: 100%;
+  height: 100%;
 }
 
-.logo-depth {
-  transform-style: preserve-3d;
+.logo-canvas {
+  opacity: 0;
+  transition: opacity 400ms ease;
 }
 
-.logo-depth i {
-  transform: translateZ(calc(var(--z) * -3px));
-  background: linear-gradient(180deg, #77756f 0%, #a8a59e 45%, #7f7c75 100%);
+.hero-logo-3d.is-loaded .logo-canvas {
+  opacity: 1;
 }
 
-.logo-face {
-  transform: translateZ(3px);
-  background: linear-gradient(180deg, #d7d4cc 0%, #b4b1a9 100%);
-  filter: drop-shadow(0 13px 17px rgba(31, 29, 25, .10));
-}
-
-.hero-logo-3d.is-paused {
-  animation-play-state: paused;
-}
-
-@keyframes logo-spin {
-  from { transform: perspective(1300px) rotateX(-5deg) rotateY(0deg); }
-  to { transform: perspective(1300px) rotateX(-5deg) rotateY(360deg); }
+.hero-logo-3d.is-loaded .logo-fallback {
+  opacity: 0;
 }
 
 .intro p {
