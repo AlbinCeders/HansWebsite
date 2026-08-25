@@ -30,12 +30,13 @@ button { color: inherit; font: inherit; }
 .portfolio-stage { position: relative; min-height: 100svh; padding: 0 5.1vw; overflow: hidden; }
 .portfolio-label { position: absolute; left: 5.1vw; bottom: 19px; z-index: 2; margin: 0; font-size: 11px; }
 .portfolio-canvas { position: relative; min-height: 100svh; }
-.project { position: absolute; width: clamp(118px, 15vw, 270px); transition: transform .52s cubic-bezier(.2,.75,.25,1), opacity .38s ease, filter .38s ease; }
-.project-one { top: 24%; left: 16%; width: clamp(166px, 22vw, 405px); }
-.project-two { top: 22%; right: 18%; width: clamp(108px, 13vw, 235px); }
-.project-three { bottom: 21%; left: 15%; width: clamp(115px, 14.5vw, 260px); }
-.project-four { bottom: 24%; right: 25%; width: clamp(142px, 18vw, 330px); }
-.project-five { top: 54%; left: 44%; width: clamp(98px, 12vw, 215px); }
+.project { position: absolute; width: clamp(88px, 10vw, 180px); transition: transform .52s cubic-bezier(.2,.75,.25,1), opacity .38s ease, filter .38s ease; }
+/* A left-to-right waveform: peaks carry the larger projects, the centre valley the smallest. */
+.project-one { top: 44%; left: 4%; width: clamp(96px, 11vw, 198px); }
+.project-two { top: 21%; left: 23%; width: clamp(120px, 13.5vw, 244px); }
+.project-three { top: 55%; left: 45%; width: clamp(76px, 8.5vw, 154px); }
+.project-four { top: 21%; left: 64%; width: clamp(120px, 13.5vw, 244px); }
+.project-five { top: 44%; right: 4%; width: clamp(96px, 11vw, 198px); }
 .project-link { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; text-align: left; color: inherit; transform-origin: center; transition: transform .52s cubic-bezier(.2,.75,.25,1); }
 .media { width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: #d7d2c7; transform-origin: center; transition: transform .42s cubic-bezier(.2,.75,.25,1), box-shadow .42s ease; }
 .project-two .media, .project-three .media { aspect-ratio: 4 / 5; }
@@ -72,12 +73,12 @@ button { color: inherit; font: inherit; }
   .portfolio-stage, .portfolio-canvas { min-height: 82svh; }
   .portfolio-stage { padding: 0 5vw; }
   .portfolio-label { left: 5vw; bottom: 12px; }
-  .project { width: 31vw; }
-  .project-one { top: 20%; left: 9%; width: 48vw; }
-  .project-two { top: 17%; right: 9%; width: 27vw; }
-  .project-three { bottom: 15%; left: 9%; width: 29vw; }
-  .project-four { bottom: 19%; right: 10%; width: 38vw; }
-  .project-five { top: 50%; left: 39%; width: 25vw; }
+  .project { width: 20vw; }
+  .project-one { top: 51%; left: 2%; width: 18vw; }
+  .project-two { top: 27%; left: 18%; width: 25vw; }
+  .project-three { top: 61%; left: 45%; width: 15vw; }
+  .project-four { top: 27%; left: 57%; width: 25vw; }
+  .project-five { top: 51%; right: 2%; width: 18vw; }
   .project.is-focused .project-link { transform: none; }
   .project.is-focused { transform: none; }
   .project.is-focused .meta, .meta { opacity: 1; transform: none; }
