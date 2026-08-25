@@ -9,19 +9,6 @@ document.addEventListener('visibilitychange', () => {
   if (!document.hidden) playPreviews();
 });
 
-document.querySelectorAll('.project').forEach((project) => {
-  project.addEventListener('mouseenter', () => {
-    const rect = project.getBoundingClientRect();
-    project.style.setProperty('--focus-x', `${window.innerWidth / 2 - rect.left - rect.width / 2}px`);
-    project.style.setProperty('--focus-y', `${window.innerHeight / 2 - rect.top - rect.height / 2}px`);
-    project.classList.add('is-focused');
-  });
-
-  project.addEventListener('mouseleave', () => {
-    project.classList.remove('is-focused');
-  });
-});
-
 const modal = document.querySelector('[data-video-modal]');
 const modalPlayer = document.querySelector('[data-video-modal-player]');
 const closeModal = () => {
