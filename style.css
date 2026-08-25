@@ -16,11 +16,10 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-inter); font-size: 12px; font-weight: 900; font-synthesis: none; line-height: normal; letter-spacing: 0; -webkit-font-smoothing: antialiased; cursor: url("assets/hans-cursor.png") 5 5, auto; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-inter); font-size: 12px; font-weight: 900; font-synthesis: none; line-height: normal; letter-spacing: 0; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 a:hover { opacity: .58; }
 button { color: inherit; font: inherit; }
-a, button { cursor: url("assets/hans-cursor.png") 5 5, pointer; }
 
 .site-header { position: absolute; inset: 0 0 auto; z-index: 10; display: flex; align-items: flex-start; justify-content: space-between; padding: 21px 5.1vw; background: transparent; }
 .brand { display: block; width: clamp(112px, 7.5vw, 142px); line-height: 0; }
