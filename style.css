@@ -57,7 +57,7 @@ button { color: inherit; font: inherit; }
 .project:hover .meta { position: relative; z-index: 1; opacity: 1; transform: translateY(0); transition-delay: .12s; }
 
 .info-section { display: grid; grid-template-columns: 1fr 1fr; align-content: start; column-gap: 3vw; min-height: 67vh; padding: 12px 5.1vw 80px; }
-.about-logo { grid-column: 1; align-self: center; justify-self: stretch; width: 100%; max-width: 980px; height: auto; padding-right: 2vw; }
+.about-logo { grid-column: 1; align-self: stretch; justify-self: stretch; width: 100%; max-width: none; height: 100%; object-fit: contain; object-position: right center; padding-right: 2vw; }
 .about-content { grid-column: 2; align-self: start; max-width: 560px; font-family: var(--font-inter); font-size: clamp(16px, 1.05vw, 21px); font-weight: 900; line-height: 1.04; letter-spacing: -.03em; }
 .about-content p { margin: 0; }
 .about-content a { text-decoration: none; }
