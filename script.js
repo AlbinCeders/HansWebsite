@@ -1,16 +1,12 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
-document.querySelectorAll('.project-hover-video').forEach((video) => {
-  const project = video.closest('.project, .featured-project');
+const previews = document.querySelectorAll('.project-hover-video');
+const playPreviews = () => previews.forEach((video) => video.play().catch(() => {}));
 
-  project.addEventListener('mouseenter', () => {
-    video.play().catch(() => {});
-  });
-
-  project.addEventListener('mouseleave', () => {
-    video.pause();
-    video.currentTime = 0;
-  });
+playPreviews();
+window.addEventListener('load', playPreviews);
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) playPreviews();
 });
 
 const modal = document.querySelector('[data-video-modal]');
@@ -22,11 +18,16 @@ const closeModal = () => {
   document.body.style.overflow = '';
 };
 
-document.querySelector('[data-video-modal-open]')?.addEventListener('click', () => {
+document.querySelectorAll('[data-video-modal-open]').forEach((project) => project.addEventListener('click', () => {
+  const source = project.dataset.videoSrc;
+  if (source && modalPlayer.querySelector('source').getAttribute('src') !== source) {
+    modalPlayer.querySelector('source').setAttribute('src', source);
+    modalPlayer.load();
+  }
   modal.hidden = false;
   document.body.style.overflow = 'hidden';
   modalPlayer.play().catch(() => {});
-});
+}));
 
 document.querySelector('[data-video-modal-close]')?.addEventListener('click', closeModal);
 modal?.addEventListener('click', (event) => {
