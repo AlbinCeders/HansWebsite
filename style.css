@@ -48,12 +48,11 @@ button { color: inherit; font: inherit; }
 .project:hover .media { box-shadow: 0 18px 45px rgba(0,0,0,.17); }
 .project:hover .meta { position: relative; z-index: 1; opacity: 1; transform: translateY(0); transition-delay: .12s; }
 
-.info-section { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; column-gap: 3vw; row-gap: clamp(28px, 2.5vw, 48px); min-height: 67vh; padding: 12px 5.1vw 80px; }
-.about-logo { grid-column: 1; grid-row: 1 / span 3; align-self: center; justify-self: stretch; width: 100%; max-width: 980px; height: auto; padding-right: 2vw; }
-.info-copy { grid-column: 2; max-width: 650px; margin: 0; font-size: clamp(19px, 1.45vw, 28px); line-height: .97; letter-spacing: -.025em; }
-.services-list, .services-email { margin: 0; font-size: clamp(19px, 1.45vw, 28px); font-weight: 900; line-height: .97; letter-spacing: -.025em; }
-.services-list { grid-column: 2; grid-row: 2; align-self: start; }
-.services-email { grid-column: 2; grid-row: 3; align-self: start; text-decoration: none; }
+.info-section { display: grid; grid-template-columns: 1fr 1fr; align-content: start; column-gap: 3vw; min-height: 67vh; padding: 12px 5.1vw 80px; }
+.about-logo { grid-column: 1; align-self: center; justify-self: stretch; width: 100%; max-width: 980px; height: auto; padding-right: 2vw; }
+.about-content { grid-column: 2; align-self: start; max-width: 650px; font-size: clamp(19px, 1.45vw, 28px); line-height: .97; letter-spacing: -.025em; }
+.about-content p { margin: 0; }
+.about-content a { text-decoration: none; }
 .site-footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 14px 5.1vw 20px; font-size: 11px; }
 .site-footer p { margin: 0 0 3px; }
 .footer-right { display: flex; gap: 15px; align-items: flex-start; }
@@ -80,10 +79,9 @@ button { color: inherit; font: inherit; }
   .project:hover .project-link { transform: none; }
   .project:hover .meta, .meta { opacity: 1; transform: none; }
   .meta h2, .meta p, .meta span { font-size: 8px; }
-  .info-section { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; column-gap: 12px; row-gap: 28px; min-height: 66vh; padding: 10px 5vw 70px; }
+  .info-section { grid-template-columns: 1fr 1fr; column-gap: 12px; min-height: 66vh; padding: 10px 5vw 70px; }
   .about-logo { padding-right: 6px; }
-  .info-copy { max-width: 100%; margin: 0; font-size: 22px; line-height: .98; letter-spacing: -.02em; }
-  .services-list, .services-email { font-size: 22px; font-weight: 900; line-height: .98; letter-spacing: -.02em; }
+  .about-content { max-width: 100%; font-size: 22px; line-height: .98; letter-spacing: -.02em; }
   .site-footer { font-size: 10px; }
   .video-modal { padding: 10px; }
   .video-modal-close { top: 12px; right: 14px; }
