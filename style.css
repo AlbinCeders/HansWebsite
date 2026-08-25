@@ -48,8 +48,8 @@ button { color: inherit; font: inherit; }
 .project:hover .media { box-shadow: 0 18px 45px rgba(0,0,0,.17); }
 .project:hover .meta { position: relative; z-index: 1; opacity: 1; transform: translateY(0); transition-delay: .12s; }
 
-.info-section { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; column-gap: 5vw; row-gap: clamp(54px, 6vw, 110px); min-height: 67vh; padding: 12px 5.1vw 80px; }
-.about-logo { grid-column: 1; grid-row: 1 / span 3; align-self: center; width: 100%; max-width: 980px; height: auto; padding-right: 4vw; }
+.info-section { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; column-gap: 5vw; row-gap: clamp(42px, 4vw, 76px); min-height: 67vh; padding: 12px 5.1vw 80px; }
+.about-logo { grid-column: 1; grid-row: 1 / span 3; align-self: center; justify-self: stretch; width: 100%; max-width: 980px; height: auto; padding-right: 4vw; }
 .info-copy { grid-column: 2; max-width: 650px; margin: 0; font-size: clamp(19px, 1.45vw, 28px); line-height: .97; letter-spacing: -.025em; }
 .services-list, .services-email { margin: 0; font-size: clamp(19px, 1.45vw, 28px); font-weight: 900; line-height: .97; letter-spacing: -.025em; }
 .services-list { grid-column: 2; grid-row: 2; align-self: start; }
@@ -80,7 +80,7 @@ button { color: inherit; font: inherit; }
   .project:hover .project-link { transform: none; }
   .project:hover .meta, .meta { opacity: 1; transform: none; }
   .meta h2, .meta p, .meta span { font-size: 8px; }
-  .info-section { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; column-gap: 24px; row-gap: 54px; min-height: 66vh; padding: 10px 5vw 70px; }
+  .info-section { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; column-gap: 24px; row-gap: 42px; min-height: 66vh; padding: 10px 5vw 70px; }
   .about-logo { padding-right: 12px; }
   .info-copy { max-width: 100%; margin: 0; font-size: 22px; line-height: .98; letter-spacing: -.02em; }
   .services-list, .services-email { font-size: 22px; font-weight: 900; line-height: .98; letter-spacing: -.02em; }
