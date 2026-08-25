@@ -51,7 +51,7 @@ button { color: inherit; font: inherit; }
 .info-section { display: grid; grid-template-columns: 1fr 1fr; column-gap: 5vw; row-gap: clamp(36px, 6vw, 110px); min-height: 67vh; padding: 12px 5.1vw 80px; }
 .info-copy { grid-column: 2; max-width: 650px; margin: 0; font-size: clamp(19px, 1.45vw, 28px); line-height: .97; letter-spacing: -.025em; }
 .services-list, .services-email { margin: 0; font-size: clamp(19px, 1.45vw, 28px); font-weight: 900; line-height: .97; letter-spacing: -.025em; }
-.services-list { grid-column: 1; grid-row: 1; align-self: start; }
+.services-list { grid-column: 1; grid-row: 2; align-self: start; }
 .services-email { grid-column: 2; grid-row: 2; align-self: start; text-decoration: none; }
 .site-footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 14px 5.1vw 20px; font-size: 11px; }
 .site-footer p { margin: 0 0 3px; }
