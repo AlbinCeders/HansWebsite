@@ -37,16 +37,16 @@ button { color: inherit; font: inherit; }
 
 .portfolio-stage { position: relative; min-height: 100svh; padding: 0 5.1vw; overflow: hidden; }
 .portfolio-canvas { position: relative; min-height: 100svh; }
-.project { position: absolute; width: clamp(88px, 10vw, 180px); transition: opacity .28s ease, filter .28s ease; }
+.project { position: absolute; --w: clamp(88px, 10vw, 180px); transition: opacity .28s ease, filter .28s ease; }
 /* A left-to-right waveform: peaks carry the larger projects, the centre valley the smallest. */
-.project-one { top: 44%; left: 4%; width: clamp(96px, 11vw, 198px); }
-.project-two { top: 21%; left: 23%; width: clamp(120px, 13.5vw, 244px); }
-.project-three { top: 55%; left: 45%; width: clamp(76px, 8.5vw, 154px); }
-.project-four { top: 21%; left: 64%; width: clamp(120px, 13.5vw, 244px); }
-.project-five { top: 44%; right: 4%; width: clamp(96px, 11vw, 198px); }
+.project-one { top: 44%; left: 4%; --w: clamp(96px, 11vw, 198px); }
+.project-two { top: 21%; left: 23%; --w: clamp(120px, 13.5vw, 244px); }
+.project-three { top: 55%; left: 45%; --w: clamp(76px, 8.5vw, 154px); }
+.project-four { top: 21%; left: 64%; --w: clamp(120px, 13.5vw, 244px); }
+.project-five { top: 44%; right: 4%; --w: clamp(96px, 11vw, 198px); }
+.project { width: calc(var(--w) * var(--scale, 1)); }
 .project-link { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; text-align: left; color: inherit; transform-origin: center; transition: transform .28s ease; }
-.media { width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: #d7d2c7; transform-origin: center; transition: transform .42s cubic-bezier(.2,.75,.25,1), box-shadow .42s ease; }
-.project-two .media, .project-three .media { aspect-ratio: 4 / 5; }
+.media { width: 100%; aspect-ratio: var(--ratio, 1.7778); overflow: hidden; background: #d7d2c7; transform-origin: center; transition: transform .42s cubic-bezier(.2,.75,.25,1), box-shadow .42s ease; }
 .project-hover-video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .meta { display: grid; grid-template-columns: 1fr auto; gap: 18px; padding-top: 7px; opacity: 0; transform: translateY(-3px); transition: opacity .18s ease, transform .18s ease; pointer-events: none; }
 .meta h2, .meta p, .meta span { margin: 0; color: #111; font-family: Arial, Helvetica, sans-serif; font-size: 8px; font-weight: 400; line-height: 1.15; letter-spacing: 0; }
@@ -81,7 +81,13 @@ button { color: inherit; font: inherit; }
 
 .video-modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 5vw; background: rgba(0, 0, 0, .94); }
 .video-modal[hidden] { display: none; }
-.video-modal-player { display: block; width: min(100%, 1280px); max-height: 84vh; background: #000; }
+.video-modal-content { width: min(100%, 1280px); display: grid; gap: 14px; color: #fff; }
+.video-modal-title { margin: 0; font-family: var(--font-inter); font-size: clamp(16px, 1.43vw, 27px); font-weight: 900; line-height: normal; letter-spacing: 0; }
+.video-modal-player { display: block; width: 100%; max-height: 70svh; background: #000; }
+.video-modal-info { margin: 0; display: flex; flex-wrap: wrap; gap: 8px clamp(28px, 4vw, 72px); font-family: var(--font-inter); font-size: clamp(12px, 1vw, 18px); font-weight: 900; line-height: 1.2; }
+.video-modal-info div { display: flex; gap: 10px; }
+.video-modal-info dt { opacity: .5; }
+.video-modal-info dd { margin: 0; }
 .video-modal-close { position: fixed; top: 18px; right: 5.1vw; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; }
 
 @media (max-width: 760px) {
@@ -92,12 +98,12 @@ button { color: inherit; font: inherit; }
   .nav a { font-size: 14px; }
   .portfolio-stage, .portfolio-canvas { min-height: 82svh; }
   .portfolio-stage { padding: 0 5vw; }
-  .project { width: 20vw; }
-  .project-one { top: 51%; left: 2%; width: 18vw; }
-  .project-two { top: 27%; left: 18%; width: 25vw; }
-  .project-three { top: 61%; left: 45%; width: 15vw; }
-  .project-four { top: 27%; left: 57%; width: 25vw; }
-  .project-five { top: 51%; right: 2%; width: 18vw; }
+  .project { --w: 20vw; }
+  .project-one { top: 51%; left: 2%; --w: 18vw; }
+  .project-two { top: 27%; left: 18%; --w: 25vw; }
+  .project-three { top: 61%; left: 45%; --w: 15vw; }
+  .project-four { top: 27%; left: 57%; --w: 25vw; }
+  .project-five { top: 51%; right: 2%; --w: 18vw; }
   .project:focus-within .project-link { transform: none; }
   .project:focus-within .meta, .meta { opacity: 1; transform: none; }
   .meta h2, .meta p, .meta span { font-size: 8px; }

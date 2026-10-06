@@ -27,8 +27,8 @@
   <main id="top">
     <section id="work" class="portfolio-stage" aria-label="Selected work">
       <div class="portfolio-canvas">
-        <article class="project project-one">
-          <button class="project-link" type="button" aria-label="Watch H&amp;M Home" data-video-modal-open data-video-src="assets/work/hm.mp4" data-client="Studio Smile" data-brand="H&amp;M Home">
+        <article style="--ratio:1.7778;--scale:1.054" class="project project-one">
+          <button class="project-link" type="button" aria-label="Watch H&amp;M Home" data-video-modal-open data-name="H&amp;M Home" data-role="Sound Design and Mix" data-video-src="assets/work/hm.mp4" data-client="Studio Smile" data-brand="H&amp;M Home">
             <div class="media"><video class="project-hover-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="assets/work/hmhoover.mp4" type="video/mp4" /></video></div>
             <div class="meta">
               <div><h2>H&amp;M Home</h2><p>Sound Design and Mix</p></div>
@@ -36,8 +36,8 @@
           </button>
         </article>
 
-        <article class="project project-two">
-          <button class="project-link" type="button" aria-label="Watch Stryktipset" data-video-modal-open data-video-src="assets/work/stryktipset.mp4" data-client="Studio Smile" data-brand="Stryktipset">
+        <article style="--ratio:1.7778;--scale:1.054" class="project project-two">
+          <button class="project-link" type="button" aria-label="Watch Stryktipset" data-video-modal-open data-name="Stryktipset" data-role="Sound Mix" data-video-src="assets/work/stryktipset.mp4" data-client="Studio Smile" data-brand="Stryktipset">
             <div class="media"><video class="project-hover-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="assets/work/stykethoover.mp4" type="video/mp4" /></video></div>
             <div class="meta">
               <div><h2>Stryktipset</h2><p>Sound Mix</p></div>
@@ -45,8 +45,8 @@
           </button>
         </article>
 
-        <article class="project project-three">
-          <button class="project-link" type="button" aria-label="Watch Stadium" data-video-modal-open data-video-src="assets/work/stadium.mp4" data-client="Studio Smile" data-brand="Stadium">
+        <article style="--ratio:1.7778;--scale:1.054" class="project project-three">
+          <button class="project-link" type="button" aria-label="Watch Stadium" data-video-modal-open data-name="Stadium" data-role="Music Production, Sound Design and Mix" data-video-src="assets/work/stadium.mp4" data-client="Studio Smile" data-brand="Stadium">
             <div class="media"><video class="project-hover-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="assets/work/stadiumhoover.mp4" type="video/mp4" /></video></div>
             <div class="meta">
               <div><h2>Stadium</h2><p>Music Production, Sound Design and Mix</p></div>
@@ -54,8 +54,8 @@
           </button>
         </article>
 
-        <article class="project project-four">
-          <button class="project-link" type="button" aria-label="Watch Waybler" data-video-modal-open data-video-src="assets/work/waybler.mp4" data-client="Studio Smile" data-brand="Waybler">
+        <article style="--ratio:1.7778;--scale:1.054" class="project project-four">
+          <button class="project-link" type="button" aria-label="Watch Waybler" data-video-modal-open data-name="Waybler" data-role="Sound Logo" data-video-src="assets/work/waybler.mp4" data-client="Studio Smile" data-brand="Waybler">
             <div class="media"><video class="project-hover-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="assets/work/wayblerhoover.mp4" type="video/mp4" /></video></div>
             <div class="meta">
               <div><h2>Waybler</h2><p>Sound Logo</p></div>
@@ -63,8 +63,8 @@
           </button>
         </article>
 
-        <article class="project project-five">
-          <button class="project-link" type="button" aria-label="Watch Svenska Freds" data-video-modal-open data-video-src="assets/work/svenskafreds.mp4" data-client="Studio Smile" data-brand="Svenska Freds">
+        <article style="--ratio:1.7778;--scale:1.054" class="project project-five">
+          <button class="project-link" type="button" aria-label="Watch Svenska Freds" data-video-modal-open data-name="Svenska Freds" data-role="Sound Design and Mix" data-video-src="assets/work/svenskafreds.mp4" data-client="Studio Smile" data-brand="Svenska Freds">
             <div class="media"><video class="project-hover-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"><source src="assets/work/svenskafredshoover.mp4" type="video/mp4" /></video></div>
             <div class="meta">
               <div><h2>Svenska Freds</h2><p>Sound Design and Mix</p></div>
@@ -82,11 +82,19 @@
     </section>
   </main>
 
-  <div class="video-modal" hidden role="dialog" aria-modal="true" aria-label="Project film" data-video-modal>
+  <div class="video-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title" data-video-modal>
     <button class="video-modal-close" type="button" aria-label="Close film" data-video-modal-close>Close</button>
-    <video class="video-modal-player" controls playsinline preload="none" data-video-modal-player>
-      <source src="" type="video/mp4" />
-    </video>
+    <div class="video-modal-content">
+      <h2 class="video-modal-title" id="modal-title" data-modal-title></h2>
+      <video class="video-modal-player" controls playsinline preload="none" data-video-modal-player>
+        <source src="" type="video/mp4" />
+      </video>
+      <dl class="video-modal-info">
+        <div><dt>Client</dt><dd data-modal-client></dd></div>
+        <div><dt>Brand</dt><dd data-modal-brand></dd></div>
+        <div><dt>Role</dt><dd data-modal-role></dd></div>
+      </dl>
+    </div>
   </div>
 
   <footer id="contact" class="site-footer">

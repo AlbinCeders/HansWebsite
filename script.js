@@ -14,6 +14,23 @@ if (!reduceMotion.matches && 'IntersectionObserver' in window) {
   previews.forEach((video) => observer.observe(video));
 }
 
+/* ---------- Shape follows the clip ---------- */
+/* HTML carries a default (16:9) so the layout is stable before the video loads;
+   once the real size is known, the box is corrected. Size is scaled so every
+   clip gets roughly the same visual area, whatever its shape. */
+const REFERENCE_RATIO = 1.6;
+document.querySelectorAll('.project').forEach((project) => {
+  const video = project.querySelector('.project-hover-video');
+  const apply = () => {
+    if (!video.videoWidth || !video.videoHeight) return;
+    const ratio = video.videoWidth / video.videoHeight;
+    project.style.setProperty('--ratio', ratio.toFixed(4));
+    project.style.setProperty('--scale', Math.sqrt(ratio / REFERENCE_RATIO).toFixed(4));
+  };
+  if (video.readyState >= 1) apply();
+  else video.addEventListener('loadedmetadata', apply, { once: true });
+});
+
 /* ---------- Video modal ---------- */
 const modal = document.querySelector('[data-video-modal]');
 const modalPlayer = document.querySelector('[data-video-modal-player]');
@@ -27,6 +44,11 @@ const openModal = (source, trigger) => {
     sourceEl.setAttribute('src', source);
     modalPlayer.load();
   }
+  const d = trigger.dataset;
+  modal.querySelector('[data-modal-title]').textContent = d.name || '';
+  modal.querySelector('[data-modal-client]').textContent = d.client || '';
+  modal.querySelector('[data-modal-brand]').textContent = d.brand || '';
+  modal.querySelector('[data-modal-role]').textContent = d.role || '';
   modal.hidden = false;
   document.body.style.overflow = 'hidden';
   closeButton.focus();
