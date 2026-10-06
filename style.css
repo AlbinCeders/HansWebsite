@@ -50,11 +50,25 @@ button { color: inherit; font: inherit; }
 .project-hover-video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .meta { display: grid; grid-template-columns: 1fr auto; gap: 18px; padding-top: 7px; opacity: 0; transform: translateY(-3px); transition: opacity .18s ease, transform .18s ease; pointer-events: none; }
 .meta h2, .meta p, .meta span { margin: 0; color: #111; font-family: Arial, Helvetica, sans-serif; font-size: 8px; font-weight: 400; line-height: 1.15; letter-spacing: 0; }
-.portfolio-canvas:has(.project:hover) .project:not(:hover) { opacity: .12; filter: saturate(.25); }
-.project:hover { z-index: 3; }
-.project:hover .project-link { transform: scale(1.45); }
-.project:hover .media { box-shadow: 0 18px 45px rgba(0,0,0,.17); }
-.project:hover .meta { position: relative; z-index: 1; opacity: 1; transform: translateY(0); transition-delay: .12s; }
+.project-link:focus-visible { outline: 2px solid var(--text); outline-offset: 4px; }
+.video-modal-close:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+/* Hover effects only on devices that really hover; keyboard focus gets the same treatment. */
+@media (hover: hover) {
+  .portfolio-canvas:has(.project:hover) .project:not(:hover) { opacity: .12; filter: saturate(.25); }
+  .project:hover { z-index: 3; }
+  .project:hover .project-link { transform: scale(1.45); }
+  .project:hover .media { box-shadow: 0 18px 45px rgba(0,0,0,.17); }
+  .project:hover .meta { position: relative; z-index: 1; opacity: 1; transform: translateY(0); transition-delay: .12s; }
+}
+.portfolio-canvas:has(.project:focus-within) .project:not(:focus-within) { opacity: .12; filter: saturate(.25); }
+.project:focus-within { z-index: 3; }
+.project:focus-within .project-link { transform: scale(1.45); }
+.project:focus-within .media { box-shadow: 0 18px 45px rgba(0,0,0,.17); }
+.project:focus-within .meta { position: relative; z-index: 1; opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}
 
 .info-section { display: grid; grid-template-columns: 1fr 1fr; align-content: start; column-gap: 3vw; min-height: 67vh; padding: 12px 5.1vw 80px; }
 .about-logo { grid-column: 1; align-self: stretch; justify-self: stretch; width: 100%; max-width: none; height: 100%; object-fit: contain; object-position: right center; padding-right: 2vw; }
@@ -84,8 +98,8 @@ button { color: inherit; font: inherit; }
   .project-three { top: 61%; left: 45%; width: 15vw; }
   .project-four { top: 27%; left: 57%; width: 25vw; }
   .project-five { top: 51%; right: 2%; width: 18vw; }
-  .project:hover .project-link { transform: none; }
-  .project:hover .meta, .meta { opacity: 1; transform: none; }
+  .project:focus-within .project-link { transform: none; }
+  .project:focus-within .meta, .meta { opacity: 1; transform: none; }
   .meta h2, .meta p, .meta span { font-size: 8px; }
   .info-section { grid-template-columns: 1fr 1fr; column-gap: 12px; min-height: 66vh; padding: 10px 5vw 70px; }
   .about-logo { padding-right: 6px; }
