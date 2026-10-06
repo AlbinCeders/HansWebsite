@@ -117,5 +117,6 @@ button { color: inherit; font: inherit; }
 }
 
 /* Brand list: sits between the waveform and the info section. */
-.brands-section { display: grid; place-items: center; padding: 16vh 5vw; }
-.brand-list { margin: 0; padding: 0; list-style: none; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: clamp(24px, 3.5vw, 64px); font-weight: 700; line-height: 1.25; letter-spacing: 0; text-transform: uppercase; }
+/* Bottom padding is large on purpose: at the very bottom of the page only info + footer (~67svh+) fill the screen, so this gap keeps the end of the list out of view. */
+.brands-section { display: grid; place-items: center; padding: 16vh 5vw 50svh; }
+.brand-list { margin: 0; padding: 0; list-style: none; text-align: center; font-family: var(--font-inter); font-size: clamp(20px, 2.4vw, 44px); font-weight: 900; line-height: 1.25; letter-spacing: 0; text-transform: uppercase; }
