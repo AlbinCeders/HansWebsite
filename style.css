@@ -38,13 +38,14 @@ button { color: inherit; font: inherit; }
 .portfolio-stage { position: relative; min-height: 100svh; padding: 0 5.1vw; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
 .portfolio-stage::-webkit-scrollbar { display: none; }
 .portfolio-canvas { position: relative; min-height: 100svh; width: max(100%, calc(var(--n) * var(--step) + 2 * var(--pad))); }
-.project { position: absolute; left: calc(var(--i) * var(--step) + var(--pad)); top: var(--top); --w: clamp(88px, 10vw, 180px); transition: opacity .28s ease, filter .28s ease; }
+.project { position: absolute; left: calc(var(--i) * var(--step) + var(--pad)); top: var(--top); transform: translateY(-50%); --w: clamp(88px, 10vw, 180px); transition: opacity .28s ease, filter .28s ease; }
 /* A left-to-right waveform: peaks carry the larger projects, the centre valley the smallest. */
 /* A left-to-right waveform that grows with the list: peaks carry the larger projects, valleys the smallest. */
-:root { --step: 18vw; --pad: 4vw; }
-.wave-mid { --top: 44%; --w: clamp(96px, 11vw, 198px); }
-.wave-peak { --top: 21%; --w: clamp(120px, 13.5vw, 244px); }
-.wave-valley { --top: 55%; --w: clamp(76px, 8.5vw, 154px); }
+:root { --step: 20vw; --pad: 4vw; }
+/* --top is the vertical CENTRE of each project, so the wave sits centred below the header. */
+.wave-mid { --top: 56%; --w: clamp(120px, 14vw, 250px); }
+.wave-peak { --top: 38%; --w: clamp(150px, 17vw, 310px); }
+.wave-valley { --top: 70%; --w: clamp(96px, 11vw, 200px); }
 .project { width: calc(var(--w) * var(--scale, 1)); }
 .project-link { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; text-align: left; color: inherit; transform-origin: center; transition: transform .28s ease; }
 .media { width: 100%; aspect-ratio: var(--ratio, 1.7778); overflow: hidden; background: #d7d2c7; transform-origin: center; transition: transform .42s cubic-bezier(.2,.75,.25,1), box-shadow .42s ease; }
@@ -100,10 +101,10 @@ button { color: inherit; font: inherit; }
   .portfolio-stage, .portfolio-canvas { min-height: 82svh; }
   .portfolio-stage { padding: 0 5vw; }
   .project { --w: 20vw; }
-  :root { --step: 32vw; --pad: 3vw; }
-  .wave-mid { --top: 51%; --w: 18vw; }
-  .wave-peak { --top: 27%; --w: 25vw; }
-  .wave-valley { --top: 61%; --w: 15vw; }
+  :root { --step: 36vw; --pad: 3vw; }
+  .wave-mid { --top: 56%; --w: 24vw; }
+  .wave-peak { --top: 40%; --w: 31vw; }
+  .wave-valley { --top: 68%; --w: 19vw; }
   .project:has(.project-link:focus-visible) .project-link { transform: none; }
   .project:has(.project-link:focus-visible) .meta, .meta { opacity: 1; transform: none; }
   .meta h2, .meta p, .meta span { font-size: 8px; }
