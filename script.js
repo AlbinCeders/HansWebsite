@@ -14,6 +14,19 @@ if (!reduceMotion.matches && 'IntersectionObserver' in window) {
   previews.forEach((video) => observer.observe(video));
 }
 
+/* ---------- Waveform: mouse wheel scrolls sideways ---------- */
+const stage = document.querySelector('.portfolio-stage');
+stage.addEventListener('wheel', (event) => {
+  if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return; // native sideways scroll
+  const max = stage.scrollWidth - stage.clientWidth;
+  if (max <= 0) return;
+  const atStart = stage.scrollLeft <= 0 && event.deltaY < 0;
+  const atEnd = stage.scrollLeft >= max - 1 && event.deltaY > 0;
+  if (atStart || atEnd) return; // let the page scroll normally at either end
+  event.preventDefault();
+  stage.scrollLeft = Math.max(0, Math.min(max, stage.scrollLeft + event.deltaY));
+}, { passive: false });
+
 /* ---------- Shape follows the clip ---------- */
 /* HTML carries a default (16:9) so the layout is stable before the video loads;
    once the real size is known, the box is corrected. Size is scaled so every

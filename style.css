@@ -35,15 +35,16 @@ button { color: inherit; font: inherit; }
 .nav { display: flex; gap: clamp(42px, 6.4vw, 122px); }
 .nav a { font-family: var(--font-inter); font-size: clamp(16px, 1.43vw, 27px); font-weight: 900; line-height: normal; letter-spacing: 0; }
 
-.portfolio-stage { position: relative; min-height: 100svh; padding: 0 5.1vw; overflow: hidden; }
-.portfolio-canvas { position: relative; min-height: 100svh; }
-.project { position: absolute; --w: clamp(88px, 10vw, 180px); transition: opacity .28s ease, filter .28s ease; }
+.portfolio-stage { position: relative; min-height: 100svh; padding: 0 5.1vw; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+.portfolio-stage::-webkit-scrollbar { display: none; }
+.portfolio-canvas { position: relative; min-height: 100svh; width: max(100%, calc(var(--n) * var(--step) + 2 * var(--pad))); }
+.project { position: absolute; left: calc(var(--i) * var(--step) + var(--pad)); top: var(--top); --w: clamp(88px, 10vw, 180px); transition: opacity .28s ease, filter .28s ease; }
 /* A left-to-right waveform: peaks carry the larger projects, the centre valley the smallest. */
-.project-one { top: 44%; left: 4%; --w: clamp(96px, 11vw, 198px); }
-.project-two { top: 21%; left: 23%; --w: clamp(120px, 13.5vw, 244px); }
-.project-three { top: 55%; left: 45%; --w: clamp(76px, 8.5vw, 154px); }
-.project-four { top: 21%; left: 64%; --w: clamp(120px, 13.5vw, 244px); }
-.project-five { top: 44%; right: 4%; --w: clamp(96px, 11vw, 198px); }
+/* A left-to-right waveform that grows with the list: peaks carry the larger projects, valleys the smallest. */
+:root { --step: 18vw; --pad: 4vw; }
+.wave-mid { --top: 44%; --w: clamp(96px, 11vw, 198px); }
+.wave-peak { --top: 21%; --w: clamp(120px, 13.5vw, 244px); }
+.wave-valley { --top: 55%; --w: clamp(76px, 8.5vw, 154px); }
 .project { width: calc(var(--w) * var(--scale, 1)); }
 .project-link { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; text-align: left; color: inherit; transform-origin: center; transition: transform .28s ease; }
 .media { width: 100%; aspect-ratio: var(--ratio, 1.7778); overflow: hidden; background: #d7d2c7; transform-origin: center; transition: transform .42s cubic-bezier(.2,.75,.25,1), box-shadow .42s ease; }
@@ -99,11 +100,10 @@ button { color: inherit; font: inherit; }
   .portfolio-stage, .portfolio-canvas { min-height: 82svh; }
   .portfolio-stage { padding: 0 5vw; }
   .project { --w: 20vw; }
-  .project-one { top: 51%; left: 2%; --w: 18vw; }
-  .project-two { top: 27%; left: 18%; --w: 25vw; }
-  .project-three { top: 61%; left: 45%; --w: 15vw; }
-  .project-four { top: 27%; left: 57%; --w: 25vw; }
-  .project-five { top: 51%; right: 2%; --w: 18vw; }
+  :root { --step: 32vw; --pad: 3vw; }
+  .wave-mid { --top: 51%; --w: 18vw; }
+  .wave-peak { --top: 27%; --w: 25vw; }
+  .wave-valley { --top: 61%; --w: 15vw; }
   .project:has(.project-link:focus-visible) .project-link { transform: none; }
   .project:has(.project-link:focus-visible) .meta, .meta { opacity: 1; transform: none; }
   .meta h2, .meta p, .meta span { font-size: 8px; }
