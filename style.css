@@ -75,6 +75,7 @@ button { color: inherit; font: inherit; }
 .info-section { display: grid; grid-template-columns: 1fr 1fr; align-content: start; column-gap: 3vw; min-height: 67vh; padding: 12px 5.1vw 80px; }
 .about-logo { grid-column: 1; align-self: stretch; justify-self: stretch; width: 100%; max-width: none; height: 100%; object-fit: contain; object-position: right center; padding-right: 2vw; }
 .about-content { grid-column: 2; align-self: start; max-width: 560px; font-family: var(--font-inter); font-size: clamp(16px, 1.05vw, 21px); font-weight: 900; line-height: 1.04; letter-spacing: -.03em; }
+.about-content { display: flex; flex-direction: column; gap: 1.04em; }
 .about-content p { margin: 0; }
 .about-content a { text-decoration: none; }
 .site-footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 14px 5.1vw 20px; font-size: 11px; }
@@ -120,3 +121,12 @@ button { color: inherit; font: inherit; }
 /* Bottom padding is large on purpose: at the very bottom of the page only info + footer (~67svh+) fill the screen, so this gap keeps the end of the list out of view. */
 .brands-section { display: grid; place-items: center; padding: 16vh 5vw 50svh; }
 .brand-list { margin: 0; padding: 0; list-style: none; text-align: center; font-family: var(--font-inter); font-size: clamp(20px, 2.4vw, 44px); font-weight: 900; line-height: 1.25; letter-spacing: 0; text-transform: uppercase; }
+
+/* Desktop: the text block is exactly as tall as the HANS logo. First line's cap-height sits on the logo's top edge, last line's baseline on its bottom edge.
+   Spare height is shared evenly between the five text groups. The -.157em trims Inter's built-in space above/below a line (line-height 1.04). */
+@media (min-width: 761px) {
+  .about-logo { align-self: start; height: auto; }
+  .about-content { align-self: stretch; justify-content: space-between; gap: .5em; }
+  .about-content p:first-child { margin-top: -.157em; }
+  .about-content p:last-child { margin-bottom: -.157em; }
+}
