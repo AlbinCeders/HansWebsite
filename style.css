@@ -109,9 +109,10 @@ button { color: inherit; font: inherit; }
   .project:has(.project-link:focus-visible) .project-link { transform: none; }
   .project:has(.project-link:focus-visible) .meta, .meta { opacity: 1; transform: none; }
   .meta h2, .meta p, .meta span { font-size: 8px; }
-  .info-section { grid-template-columns: 1fr 1fr; column-gap: 12px; min-height: 66vh; padding: 10px 5vw 70px; }
-  .about-logo { padding-right: 6px; }
-  .about-content { max-width: 100%; font-size: 18px; line-height: 1.04; letter-spacing: -.025em; }
+  /* Mobile: logo sits above the text, full width, text below it. */
+  .info-section { grid-template-columns: 1fr; row-gap: 28px; min-height: 66vh; padding: 10px 5vw 70px; }
+  .about-logo { grid-column: 1; align-self: start; height: auto; padding-right: 0; object-position: left center; }
+  .about-content { grid-column: 1; max-width: 100%; font-size: 18px; line-height: 1.04; letter-spacing: -.025em; }
   .site-footer { font-size: 10px; }
   .video-modal { padding: 10px; }
   .video-modal-close { top: 12px; right: 14px; }
