@@ -16,10 +16,12 @@
     .showreel-page { min-height: 100svh; display: flex; flex-direction: column; }
     .showreel-page .site-header { position: static; }
     .showreel-stage { flex: 1; display: grid; place-items: center; padding: 0 5.1vw 5.1vw; min-height: 0; }
-    .showreel-video { display: block; width: 100%; max-width: 1600px; max-height: calc(100svh - 150px); background: #000; }
+    /* The box takes the film's own shape (--ratio is set from the video file, 16:9 until it loads), so there are no black bars around it.
+    Width is whichever is smaller: the available width, or the width that makes the film exactly as tall as the space left under the header. */
+    .showreel-video { display: block; aspect-ratio: var(--ratio, 1.7778); width: min(100%, 1600px, calc((100svh - 150px) * var(--ratio, 1.7778))); height: auto; background: transparent; }
     @media (max-width: 760px) {
       .showreel-stage { padding: 0 5vw 5vw; }
-      .showreel-video { max-height: calc(100svh - 110px); }
+      .showreel-video { width: min(100%, calc((100svh - 110px) * var(--ratio, 1.7778))); }
     }
   </style>
 </head>
@@ -33,5 +35,16 @@
       <source src="assets/work/showreel.mp4" type="video/mp4" />
     </video>
   </main>
+
+  <script>
+    const video = document.querySelector('.showreel-video');
+    const setRatio = () => {
+      if (video.videoWidth && video.videoHeight) {
+        video.style.setProperty('--ratio', (video.videoWidth / video.videoHeight).toFixed(4));
+      }
+    };
+    if (video.readyState >= 1) setRatio();
+    else video.addEventListener('loadedmetadata', setRatio, { once: true });
+  </script>
 </body>
 </html>
