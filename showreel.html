@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="HANS — Showreel. A global sound design studio based in Stockholm." />
+  <meta name="theme-color" content="#ffffff" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="HANS — Showreel" />
+  <meta property="og:description" content="A global sound design studio based in Stockholm." />
+  <meta name="twitter:card" content="summary" />
+  <title>HANS — Showreel</title>
+  <link rel="icon" type="image/png" href="assets/hans-cursor.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .showreel-page { min-height: 100svh; display: flex; flex-direction: column; }
+    .showreel-page .site-header { position: static; }
+    .showreel-stage { flex: 1; display: grid; place-items: center; padding: 0 5.1vw 5.1vw; min-height: 0; }
+    .showreel-video { display: block; width: 100%; max-width: 1600px; max-height: calc(100svh - 150px); background: #000; }
+    @media (max-width: 760px) {
+      .showreel-stage { padding: 0 5vw 5vw; }
+      .showreel-video { max-height: calc(100svh - 110px); }
+    }
+  </style>
+</head>
+<body class="showreel-page">
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="HANS home"><img src="assets/hans-logo.svg" alt="HANS" /></a>
+  </header>
+
+  <main class="showreel-stage">
+    <video class="showreel-video" controls playsinline preload="metadata" aria-label="HANS showreel">
+      <source src="assets/work/showreel.mp4" type="video/mp4" />
+    </video>
+  </main>
+</body>
+</html>
