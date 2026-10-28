@@ -59,9 +59,11 @@ const openModal = (source, trigger) => {
   }
   const d = trigger.dataset;
   modal.querySelector('[data-modal-title]').textContent = d.name || '';
-  modal.querySelector('[data-modal-client]').textContent = d.client || '';
-  modal.querySelector('[data-modal-brand]').textContent = d.brand || '';
-  modal.querySelector('[data-modal-role]').textContent = d.role || '';
+  [['client', d.client], ['brand', d.brand], ['role', d.role], ['note', d.note]].forEach(([key, value]) => {
+    const el = modal.querySelector(`[data-modal-${key}]`);
+    el.textContent = value || '';
+    (key === 'note' ? el : el.parentElement).hidden = !value;
+  });
   modal.hidden = false;
   document.body.style.overflow = 'hidden';
   closeButton.focus();
