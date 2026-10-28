@@ -2,6 +2,7 @@
   --bg: #ffffff;
   --text: #111;
   --muted: #6f6b63;
+  --accent: #e8261c;
   --page-x: 14px;
   --font-inter: "Inter Figma", Arial, Helvetica, sans-serif;
 }
@@ -133,3 +134,14 @@ button { color: inherit; font: inherit; }
   .about-content p:first-child { margin-top: -.157em; }
   .about-content p:last-child { margin-bottom: -.157em; }
 }
+
+/* Red accent on hover: video captions, brand list rows and the info text. */
+.meta h2, .meta p, .brand-list li, .about-content p, .about-content span, .about-content a { transition: color .18s ease; }
+@media (hover: hover) {
+  .project:hover .meta h2, .project:hover .meta p { color: var(--accent); }
+  .brand-list li:hover { color: var(--accent); }
+  .about-content p:not(:has(span)):hover, .about-content span:hover { color: var(--accent); }
+  .about-content a:hover { opacity: 1; color: var(--accent); }
+}
+.project:has(.project-link:focus-visible) .meta h2, .project:has(.project-link:focus-visible) .meta p { color: var(--accent); }
+.about-content a:focus-visible { color: var(--accent); }
