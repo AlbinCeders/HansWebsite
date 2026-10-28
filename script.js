@@ -98,3 +98,31 @@ document.addEventListener('keydown', (event) => {
     focusable[(next + focusable.length) % focusable.length].focus();
   }
 });
+
+// Brand list: the row closest to the middle of the screen turns red while scrolling.
+const brandRows = document.querySelectorAll('.brand-list li');
+if (brandRows.length) {
+  const list = document.querySelector('.brand-list');
+  let ticking = false;
+  const updateActiveBrand = () => {
+    ticking = false;
+    const mid = window.innerHeight / 2;
+    const box = list.getBoundingClientRect();
+    let active = null;
+    if (box.top <= mid && box.bottom >= mid) {
+      let best = Infinity;
+      brandRows.forEach((row) => {
+        const r = row.getBoundingClientRect();
+        const dist = Math.abs(r.top + r.height / 2 - mid);
+        if (dist < best) { best = dist; active = row; }
+      });
+    }
+    brandRows.forEach((row) => row.classList.toggle('is-active', row === active));
+  };
+  const requestUpdate = () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(updateActiveBrand); }
+  };
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+  updateActiveBrand();
+}

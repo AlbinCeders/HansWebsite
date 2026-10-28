@@ -135,13 +135,11 @@ button { color: inherit; font: inherit; }
   .about-content p:last-child { margin-bottom: -.157em; }
 }
 
-/* Red accent on hover: video captions, brand list rows and the info text. */
-.meta h2, .meta p, .brand-list li, .about-content p, .about-content span, .about-content a { transition: color .18s ease; }
+/* Red accent: the brand row at the centre of the screen (set by scroll in script.js), and the info text on hover. */
+.brand-list li, .about-content p, .about-content span, .about-content a { transition: color .18s ease; }
+.brand-list li.is-active { color: var(--accent); }
 @media (hover: hover) {
-  .project:hover .meta h2, .project:hover .meta p { color: var(--accent); }
-  .brand-list li:hover { color: var(--accent); }
   .about-content p:not(:has(span)):hover, .about-content span:hover { color: var(--accent); }
   .about-content a:hover { opacity: 1; color: var(--accent); }
 }
-.project:has(.project-link:focus-visible) .meta h2, .project:has(.project-link:focus-visible) .meta p { color: var(--accent); }
 .about-content a:focus-visible { color: var(--accent); }
