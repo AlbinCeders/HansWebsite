@@ -2,7 +2,7 @@
   --bg: #ffffff;
   --text: #111;
   --muted: #6f6b63;
-  --accent: #e8261c;
+  --accent: #8f1c12;
   --page-x: 14px;
   --font-inter: "Inter Figma", Arial, Helvetica, sans-serif;
 }
@@ -30,37 +30,34 @@ a { color: inherit; text-decoration: none; }
 a:hover { opacity: .58; }
 button { color: inherit; font: inherit; }
 
-/* White header bar: logo left, nav right, both centred vertically. */
-:root { --header-h: clamp(56px, 5vw, 100px); }
-.site-header { position: fixed; inset: 0 0 auto; z-index: 20; height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5.1vw; background: var(--bg); }
-.brand { display: block; width: clamp(96px, 7.5vw, 142px); line-height: 0; }
-.brand img { display: block; width: 100%; height: auto; }
-.nav { display: flex; gap: clamp(32px, 4.7vw, 92px); }
-.nav a { font-family: var(--font-inter); font-size: clamp(13px, 1.05vw, 20px); font-weight: 900; line-height: normal; letter-spacing: 0; }
-main { padding-top: var(--header-h); }
-#work, #info { scroll-margin-top: var(--header-h); }
+#info { scroll-margin-top: 0; }
 
-/* Work reel: a full-screen preview pinned under the header while the page scrolls.
+/* Work reel: a full-screen preview pinned to the screen while the page scrolls.
    Each project gets --step of scroll; script.js picks the active one from the scroll position. */
-.reel { --step: 70svh; --view: calc(100svh - var(--header-h)); position: relative; height: calc(var(--n) * var(--step) + var(--view)); }
-.reel-sticky { position: sticky; top: var(--header-h); height: var(--view); overflow: hidden; background: #111; color: #fff; }
+.reel { --step: 70svh; --view: 100svh; position: relative; height: calc(var(--n) * var(--step) + var(--view)); }
+.reel-sticky { position: sticky; top: 0; height: var(--view); overflow: hidden; background: #111; color: #fff; }
 .reel-media, .reel-video, .reel-open { position: absolute; inset: 0; }
 .reel-video { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
 .reel-video.is-active { opacity: 1; }
 .reel-open { z-index: 1; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
-.reel-clients, .reel-service { position: absolute; z-index: 2; top: 55%; transform: translateY(-50%); margin: 0; font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: 400; letter-spacing: 0; text-shadow: 0 0 14px rgba(0, 0, 0, .3); }
-.reel-clients { left: 7vw; padding: 0; list-style: none; }
+.reel-clients, .reel-service { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); margin: 0; font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: 400; letter-spacing: 0; text-shadow: 0 0 14px rgba(0, 0, 0, .3); }
+.reel-clients { left: 19.5vw; padding: 0; list-style: none; }
 .reel-client { display: block; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; font: inherit; font-size: clamp(11px, .72vw, 15px); line-height: 1.25; text-align: left; transition: color .25s ease, font-size .25s ease; }
 .reel-client.is-active { color: var(--accent); font-size: clamp(15px, 1.05vw, 21px); }
-.reel-service { right: 7vw; max-width: 40vw; color: var(--accent); font-size: clamp(15px, 1.05vw, 21px); line-height: 1.2; text-align: right; }
-.reel-client:focus-visible, .reel-open:focus-visible { outline: 2px solid #fff; outline-offset: -6px; }
+.reel-service { right: 14vw; max-width: 34vw; color: var(--accent); font-size: clamp(15px, 1.05vw, 21px); line-height: 1.2; text-align: right; }
+/* HANS logo top centre (the SVG used as a mask so it takes the accent colour) and Contact bottom centre. */
+.reel-logo { position: absolute; z-index: 2; top: 6.5svh; left: 50%; transform: translateX(-50%); width: clamp(120px, 14vw, 280px); aspect-ratio: 390 / 141; background: var(--accent); -webkit-mask: url("assets/hans-logo.svg") center / contain no-repeat; mask: url("assets/hans-logo.svg") center / contain no-repeat; }
+.reel-logo:hover { opacity: 1; }
+.reel-contact { position: absolute; z-index: 2; bottom: 6.5svh; left: 50%; transform: translateX(-50%); color: var(--accent); font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: 400; font-size: clamp(13px, 1.05vw, 20px); letter-spacing: 0; text-transform: uppercase; }
+.reel-contact:hover { opacity: .7; }
+.reel-client:focus-visible, .reel-open:focus-visible, .reel-logo:focus-visible, .reel-contact:focus-visible { outline: 2px solid #fff; outline-offset: -6px; }
 .video-modal-close:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
 
-.info-section { display: grid; grid-template-columns: 1fr 1fr; align-content: start; column-gap: 3vw; min-height: calc(100svh - var(--header-h) - 48px); padding: 12px 5.1vw 80px; }
+.info-section { display: grid; grid-template-columns: 1fr 1fr; align-content: start; column-gap: 3vw; min-height: calc(100svh - 48px); padding: 30svh 5.1vw 80px; }
 .about-logo { grid-column: 1; align-self: stretch; justify-self: stretch; width: 100%; max-width: none; height: 100%; object-fit: contain; object-position: right center; padding-right: 2vw; }
 .about-content { grid-column: 2; align-self: start; max-width: 560px; font-family: var(--font-inter); font-size: clamp(16px, 1.05vw, 21px); font-weight: 900; line-height: 1.04; letter-spacing: -.03em; }
 .about-content { display: flex; flex-direction: column; gap: 1.04em; }
@@ -84,16 +81,14 @@ main { padding-top: var(--header-h); }
 .video-modal-close { position: fixed; top: 18px; right: 5.1vw; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; }
 
 @media (max-width: 760px) {
-  :root { --page-x: 10px; --header-h: 52px; }
-  .site-header { padding: 0 5vw; }
-  .brand { width: 82px; }
-  .nav { gap: 19px; }
-  .nav a { font-size: 13px; }
+  :root { --page-x: 10px; }
+  .reel-logo { width: 34vw; top: 5svh; }
+  .reel-contact { bottom: 5svh; font-size: 14px; }
   .reel { --step: 60svh; }
-  .reel-clients { left: 5vw; }
-  .reel-service { top: auto; bottom: 24px; left: 5vw; right: 5vw; max-width: none; transform: none; text-align: left; }
+  .reel-clients { left: 7vw; }
+  .reel-service { top: auto; bottom: 13svh; left: 7vw; right: 7vw; max-width: none; transform: none; text-align: left; }
   /* Mobile: logo sits above the text, full width, text below it. */
-  .info-section { grid-template-columns: 1fr; row-gap: 28px; min-height: calc(100svh - var(--header-h) - 44px); padding: 10px 5vw 70px; }
+  .info-section { grid-template-columns: 1fr; row-gap: 28px; min-height: calc(100svh - 44px); padding: 22svh 5vw 70px; }
   .about-logo { grid-column: 1; align-self: start; height: auto; padding-right: 0; object-position: left center; }
   .about-content { grid-column: 1; max-width: 100%; font-size: 18px; line-height: 1.04; letter-spacing: -.025em; }
   .site-footer { font-size: 10px; }

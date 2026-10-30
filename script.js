@@ -1,7 +1,7 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
 /* ---------- Work reel ---------- */
-/* The reel section is taller than the screen; its inner part sticks under the header.
+/* The reel section is taller than the screen; its inner part sticks to the screen.
    Scroll position picks the active project: its preview fills the background,
    its client name turns red and its service text shows on the right. */
 const reel = document.querySelector('.reel');

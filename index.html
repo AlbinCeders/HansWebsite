@@ -15,14 +15,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="#top" aria-label="HANS home"><img src="assets/hans-logo.svg" alt="HANS" /></a>
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="#info">Info</a>
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
 
   <main id="top">
     <section id="work" class="reel" style="--n:9" aria-label="Selected work">
@@ -38,6 +30,8 @@
           <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/kia.mp4"></video>
           <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/waybler.mp4"></video>
         </div>
+        <a class="reel-logo" href="#info" aria-label="HANS – info"></a>
+        <a class="reel-contact" href="#contact">Contact</a>
         <button class="reel-open" type="button" aria-label="Watch H&amp;M Home" data-reel-open></button>
         <ol class="reel-clients" aria-label="Clients">
           <li><button class="reel-client" type="button" data-index="0" data-name="H&amp;M Home" data-brand="H&amp;M Home" data-role="Sound Design and Mix" data-video-src="assets/work/hm.mp4" data-note="Made during employment at Studio Smile">H&amp;M Home</button></li>
