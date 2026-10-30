@@ -1,48 +1,84 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ---------- Hover previews: play only while visible ---------- */
-const previews = document.querySelectorAll('.project-hover-video');
+/* ---------- Work reel ---------- */
+/* The reel section is taller than the screen; its inner part sticks under the header.
+   Scroll position picks the active project: its preview fills the background,
+   its client name turns red and its service text shows on the right. */
+const reel = document.querySelector('.reel');
+const reelVideos = [...document.querySelectorAll('.reel-video')];
+const reelClients = [...document.querySelectorAll('.reel-client')];
+const reelOpen = document.querySelector('[data-reel-open]');
+const reelService = document.querySelector('[data-reel-service]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let activeIndex = -1;
 
-if (!reduceMotion.matches && 'IntersectionObserver' in window) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(({ target, isIntersecting }) => {
-      if (isIntersecting) target.play().catch(() => {});
-      else target.pause();
-    });
-  }, { threshold: 0.1 });
-  previews.forEach((video) => observer.observe(video));
+// Load a video only when it is (or is about to be) on screen.
+const loadVideo = (video, preload) => {
+  if (!video) return;
+  if (!video.getAttribute('src')) video.src = video.dataset.src;
+  if (preload === 'auto') video.preload = 'auto';
+};
+
+const reelScrollRange = () => {
+  const sticky = reel.querySelector('.reel-sticky');
+  return Math.max(1, reel.offsetHeight - sticky.offsetHeight);
+};
+
+const setActive = (index) => {
+  if (index === activeIndex) return;
+  activeIndex = index;
+  reelVideos.forEach((video, i) => {
+    const on = i === index;
+    video.classList.toggle('is-active', on);
+    if (on) {
+      loadVideo(video, 'auto');
+      if (!reduceMotion.matches) video.play().catch(() => {});
+    } else if (!video.paused) {
+      video.pause();
+    }
+  });
+  loadVideo(reelVideos[index + 1]); // warm up the next one
+  reelClients.forEach((client, i) => {
+    client.classList.toggle('is-active', i === index);
+    if (i === index) client.setAttribute('aria-current', 'true');
+    else client.removeAttribute('aria-current');
+  });
+  const d = reelClients[index].dataset;
+  reelService.textContent = d.role || '';
+  reelOpen.setAttribute('aria-label', `Watch ${reelClients[index].textContent}`);
+};
+
+let reelTicking = false;
+const updateReel = () => {
+  reelTicking = false;
+  const scrolled = -reel.getBoundingClientRect().top;
+  const step = reelScrollRange() / reelClients.length;
+  const index = Math.min(reelClients.length - 1, Math.max(0, Math.floor(scrolled / step)));
+  setActive(index);
+};
+const requestReelUpdate = () => {
+  if (!reelTicking) { reelTicking = true; requestAnimationFrame(updateReel); }
+};
+window.addEventListener('scroll', requestReelUpdate, { passive: true });
+window.addEventListener('resize', requestReelUpdate);
+updateReel();
+
+// Pause the background video when the reel is scrolled out of view.
+if ('IntersectionObserver' in window) {
+  new IntersectionObserver(([entry]) => {
+    const video = reelVideos[activeIndex];
+    if (!video) return;
+    if (entry.isIntersecting && !reduceMotion.matches) video.play().catch(() => {});
+    else video.pause();
+  }).observe(reel.querySelector('.reel-sticky'));
 }
 
-/* ---------- Waveform: mouse wheel scrolls sideways ---------- */
-const stage = document.querySelector('.portfolio-stage');
-stage.addEventListener('wheel', (event) => {
-  if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return; // native sideways scroll
-  const max = stage.scrollWidth - stage.clientWidth;
-  if (max <= 0) return;
-  const atStart = stage.scrollLeft <= 0 && event.deltaY < 0;
-  const atEnd = stage.scrollLeft >= max - 1 && event.deltaY > 0;
-  if (atStart || atEnd) return; // let the page scroll normally at either end
-  event.preventDefault();
-  stage.scrollLeft = Math.max(0, Math.min(max, stage.scrollLeft + event.deltaY));
-}, { passive: false });
-
-/* ---------- Shape follows the clip ---------- */
-/* HTML carries a default (16:9) so the layout is stable before the video loads;
-   once the real size is known, the box is corrected. Size is scaled so every
-   clip gets roughly the same visual area, whatever its shape. */
-const REFERENCE_RATIO = 1.6;
-document.querySelectorAll('.project').forEach((project) => {
-  const video = project.querySelector('.project-hover-video');
-  const apply = () => {
-    if (!video.videoWidth || !video.videoHeight) return;
-    const ratio = video.videoWidth / video.videoHeight;
-    project.style.setProperty('--ratio', ratio.toFixed(4));
-    project.style.setProperty('--scale', Math.sqrt(ratio / REFERENCE_RATIO).toFixed(4));
-  };
-  if (video.readyState >= 1) apply();
-  else video.addEventListener('loadedmetadata', apply, { once: true });
-});
+// Clicking a client name scrolls to that project.
+reelClients.forEach((client, i) => client.addEventListener('click', () => {
+  const step = reelScrollRange() / reelClients.length;
+  const top = reel.getBoundingClientRect().top + window.scrollY + i * step + step * 0.1;
+  window.scrollTo({ top, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+}));
 
 /* ---------- Video modal ---------- */
 const modal = document.querySelector('[data-video-modal]');
@@ -78,8 +114,12 @@ const closeModal = () => {
   if (lastFocused) lastFocused.focus();
 };
 
-document.querySelectorAll('[data-video-modal-open]').forEach((project) =>
-  project.addEventListener('click', () => openModal(project.dataset.videoSrc, project)));
+// Clicking the background opens the active project's full film with sound.
+reelOpen.addEventListener('click', () => {
+  const active = reelClients[activeIndex];
+  openModal(active.dataset.videoSrc, active);
+  lastFocused = reelOpen;
+});
 
 closeButton?.addEventListener('click', closeModal);
 modal?.addEventListener('click', (event) => {
@@ -98,31 +138,3 @@ document.addEventListener('keydown', (event) => {
     focusable[(next + focusable.length) % focusable.length].focus();
   }
 });
-
-// Brand list: the row closest to the middle of the screen turns red while scrolling.
-const brandRows = document.querySelectorAll('.brand-list li');
-if (brandRows.length) {
-  const list = document.querySelector('.brand-list');
-  let ticking = false;
-  const updateActiveBrand = () => {
-    ticking = false;
-    const mid = window.innerHeight / 2;
-    const box = list.getBoundingClientRect();
-    let active = null;
-    if (box.top <= mid && box.bottom >= mid) {
-      let best = Infinity;
-      brandRows.forEach((row) => {
-        const r = row.getBoundingClientRect();
-        const dist = Math.abs(r.top + r.height / 2 - mid);
-        if (dist < best) { best = dist; active = row; }
-      });
-    }
-    brandRows.forEach((row) => row.classList.toggle('is-active', row === active));
-  };
-  const requestUpdate = () => {
-    if (!ticking) { ticking = true; requestAnimationFrame(updateActiveBrand); }
-  };
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
-  updateActiveBrand();
-}

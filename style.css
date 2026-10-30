@@ -30,50 +30,37 @@ a { color: inherit; text-decoration: none; }
 a:hover { opacity: .58; }
 button { color: inherit; font: inherit; }
 
-.site-header { position: absolute; inset: 0 0 auto; z-index: 10; display: flex; align-items: flex-start; justify-content: space-between; padding: 21px 5.1vw; background: transparent; }
-.brand { display: block; width: clamp(112px, 7.5vw, 142px); line-height: 0; }
+/* White header bar: logo left, nav right, both centred vertically. */
+:root { --header-h: clamp(56px, 5vw, 100px); }
+.site-header { position: fixed; inset: 0 0 auto; z-index: 20; height: var(--header-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5.1vw; background: var(--bg); }
+.brand { display: block; width: clamp(96px, 7.5vw, 142px); line-height: 0; }
 .brand img { display: block; width: 100%; height: auto; }
-.nav { display: flex; gap: clamp(42px, 6.4vw, 122px); }
-.nav a { font-family: var(--font-inter); font-size: clamp(16px, 1.43vw, 27px); font-weight: 900; line-height: normal; letter-spacing: 0; }
+.nav { display: flex; gap: clamp(32px, 4.7vw, 92px); }
+.nav a { font-family: var(--font-inter); font-size: clamp(13px, 1.05vw, 20px); font-weight: 900; line-height: normal; letter-spacing: 0; }
+main { padding-top: var(--header-h); }
+#work, #info { scroll-margin-top: var(--header-h); }
 
-.portfolio-stage { position: relative; min-height: 100svh; padding: 0 5.1vw; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
-.portfolio-stage::-webkit-scrollbar { display: none; }
-.portfolio-canvas { position: relative; min-height: 100svh; width: max(100%, calc(var(--n) * var(--step) + 2 * var(--pad))); }
-.project { position: absolute; left: calc(var(--i) * var(--step) + var(--pad)); top: var(--top); transform: translateY(-50%); --w: clamp(88px, 10vw, 180px); transition: opacity .28s ease, filter .28s ease; }
-/* A left-to-right waveform: peaks carry the larger projects, the centre valley the smallest. */
-/* A left-to-right waveform that grows with the list: peaks carry the larger projects, valleys the smallest. */
-:root { --step: 20vw; --pad: 4vw; }
-/* --top is the vertical CENTRE of each project, so the wave sits centred below the header. */
-.wave-mid { --top: 56%; --w: clamp(120px, 14vw, 250px); }
-.wave-peak { --top: 38%; --w: clamp(150px, 17vw, 310px); }
-.wave-valley { --top: 70%; --w: clamp(96px, 11vw, 200px); }
-.project { width: calc(var(--w) * var(--scale, 1)); }
-.project-link { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; text-align: left; color: inherit; transform-origin: center; transition: transform .28s ease; }
-.media { width: 100%; aspect-ratio: var(--ratio, 1.7778); overflow: hidden; background: #d7d2c7; transform-origin: center; transition: transform .42s cubic-bezier(.2,.75,.25,1), box-shadow .42s ease; }
-.project-hover-video { display: block; width: 100%; height: 100%; object-fit: cover; }
-.meta { display: grid; grid-template-columns: 1fr auto; gap: 18px; padding-top: 7px; opacity: 0; transform: translateY(-3px); transition: opacity .18s ease, transform .18s ease; pointer-events: none; }
-.meta h2, .meta p, .meta span { margin: 0; color: #111; font-family: Arial, Helvetica, sans-serif; font-size: 8px; font-weight: 400; line-height: 1.15; letter-spacing: 0; }
-.project-link:focus-visible { outline: 2px solid var(--text); outline-offset: 4px; }
+/* Work reel: a full-screen preview pinned under the header while the page scrolls.
+   Each project gets --step of scroll; script.js picks the active one from the scroll position. */
+.reel { --step: 70svh; --view: calc(100svh - var(--header-h)); position: relative; height: calc(var(--n) * var(--step) + var(--view)); }
+.reel-sticky { position: sticky; top: var(--header-h); height: var(--view); overflow: hidden; background: #111; color: #fff; }
+.reel-media, .reel-video, .reel-open { position: absolute; inset: 0; }
+.reel-video { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+.reel-video.is-active { opacity: 1; }
+.reel-open { z-index: 1; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.reel-clients, .reel-service { position: absolute; z-index: 2; top: 55%; transform: translateY(-50%); margin: 0; font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: 400; letter-spacing: 0; text-shadow: 0 0 14px rgba(0, 0, 0, .3); }
+.reel-clients { left: 7vw; padding: 0; list-style: none; }
+.reel-client { display: block; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; font: inherit; font-size: clamp(11px, .72vw, 15px); line-height: 1.25; text-align: left; transition: color .25s ease, font-size .25s ease; }
+.reel-client.is-active { color: var(--accent); font-size: clamp(15px, 1.05vw, 21px); }
+.reel-service { right: 7vw; max-width: 40vw; color: var(--accent); font-size: clamp(15px, 1.05vw, 21px); line-height: 1.2; text-align: right; }
+.reel-client:focus-visible, .reel-open:focus-visible { outline: 2px solid #fff; outline-offset: -6px; }
 .video-modal-close:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
-/* Hover effects only on devices that really hover; keyboard focus gets the same treatment. */
-@media (hover: hover) {
-  .portfolio-canvas:has(.project:hover) .project:not(:hover) { opacity: .12; filter: saturate(.25); }
-  .project:hover { z-index: 3; }
-  .project:hover .project-link { transform: scale(1.45); }
-  .project:hover .media { box-shadow: 0 18px 45px rgba(0,0,0,.17); }
-  .project:hover .meta { position: relative; z-index: 1; opacity: 1; transform: translateY(0); transition-delay: .12s; }
-}
-.portfolio-canvas:has(.project-link:focus-visible) .project:not(:has(.project-link:focus-visible)) { opacity: .12; filter: saturate(.25); }
-.project:has(.project-link:focus-visible) { z-index: 3; }
-.project:has(.project-link:focus-visible) .project-link { transform: scale(1.45); }
-.project:has(.project-link:focus-visible) .media { box-shadow: 0 18px 45px rgba(0,0,0,.17); }
-.project:has(.project-link:focus-visible) .meta { position: relative; z-index: 1; opacity: 1; transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
 
-.info-section { display: grid; grid-template-columns: 1fr 1fr; align-content: start; column-gap: 3vw; min-height: 67vh; padding: 12px 5.1vw 80px; }
+.info-section { display: grid; grid-template-columns: 1fr 1fr; align-content: start; column-gap: 3vw; min-height: calc(100svh - var(--header-h) - 48px); padding: 12px 5.1vw 80px; }
 .about-logo { grid-column: 1; align-self: stretch; justify-self: stretch; width: 100%; max-width: none; height: 100%; object-fit: contain; object-position: right center; padding-right: 2vw; }
 .about-content { grid-column: 2; align-self: start; max-width: 560px; font-family: var(--font-inter); font-size: clamp(16px, 1.05vw, 21px); font-weight: 900; line-height: 1.04; letter-spacing: -.03em; }
 .about-content { display: flex; flex-direction: column; gap: 1.04em; }
@@ -97,34 +84,22 @@ button { color: inherit; font: inherit; }
 .video-modal-close { position: fixed; top: 18px; right: 5.1vw; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; }
 
 @media (max-width: 760px) {
-  :root { --page-x: 10px; }
-  .site-header { padding: 13px 5vw; }
+  :root { --page-x: 10px; --header-h: 52px; }
+  .site-header { padding: 0 5vw; }
   .brand { width: 82px; }
   .nav { gap: 19px; }
-  .nav a { font-size: 14px; }
-  .portfolio-stage, .portfolio-canvas { min-height: 82svh; }
-  .portfolio-stage { padding: 0 5vw; }
-  .project { --w: 20vw; }
-  :root { --step: 36vw; --pad: 3vw; }
-  .wave-mid { --top: 56%; --w: 24vw; }
-  .wave-peak { --top: 40%; --w: 31vw; }
-  .wave-valley { --top: 68%; --w: 19vw; }
-  .project:has(.project-link:focus-visible) .project-link { transform: none; }
-  .project:has(.project-link:focus-visible) .meta, .meta { opacity: 1; transform: none; }
-  .meta h2, .meta p, .meta span { font-size: 8px; }
+  .nav a { font-size: 13px; }
+  .reel { --step: 60svh; }
+  .reel-clients { left: 5vw; }
+  .reel-service { top: auto; bottom: 24px; left: 5vw; right: 5vw; max-width: none; transform: none; text-align: left; }
   /* Mobile: logo sits above the text, full width, text below it. */
-  .info-section { grid-template-columns: 1fr; row-gap: 28px; min-height: 66vh; padding: 10px 5vw 70px; }
+  .info-section { grid-template-columns: 1fr; row-gap: 28px; min-height: calc(100svh - var(--header-h) - 44px); padding: 10px 5vw 70px; }
   .about-logo { grid-column: 1; align-self: start; height: auto; padding-right: 0; object-position: left center; }
   .about-content { grid-column: 1; max-width: 100%; font-size: 18px; line-height: 1.04; letter-spacing: -.025em; }
   .site-footer { font-size: 10px; }
   .video-modal { padding: 10px; }
   .video-modal-close { top: 12px; right: 14px; }
 }
-
-/* Brand list: sits between the waveform and the info section. */
-/* Bottom padding is large on purpose: at the very bottom of the page only info + footer (~67svh+) fill the screen, so this gap keeps the end of the list out of view. */
-.brands-section { display: grid; place-items: center; padding: 16vh 5vw 50svh; }
-.brand-list { margin: 0; padding: 0; list-style: none; text-align: center; font-family: var(--font-inter); font-size: clamp(20px, 2.4vw, 44px); font-weight: 900; line-height: 1.25; letter-spacing: 0; text-transform: uppercase; }
 
 /* Desktop: the text block is exactly as tall as the HANS logo. First line's cap-height sits on the logo's top edge, last line's baseline on its bottom edge.
    Spare height is shared evenly between the five text groups. The -.157em trims Inter's built-in space above/below a line (line-height 1.04). */
@@ -135,9 +110,8 @@ button { color: inherit; font: inherit; }
   .about-content p:last-child { margin-bottom: -.157em; }
 }
 
-/* Red accent: the brand row at the centre of the screen (set by scroll in script.js), and the info text on hover. */
-.brand-list li, .about-content p, .about-content span, .about-content a { transition: color .18s ease; }
-.brand-list li.is-active { color: var(--accent); }
+/* Red accent on hover for the info text. */
+.about-content p, .about-content span, .about-content a { transition: color .18s ease; }
 @media (hover: hover) {
   .about-content p:not(:has(span)):hover, .about-content span:hover { color: var(--accent); }
   .about-content a:hover { opacity: 1; color: var(--accent); }
