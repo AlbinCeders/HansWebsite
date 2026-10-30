@@ -42,13 +42,13 @@ button { color: inherit; font: inherit; }
 .reel-open { z-index: 1; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
 .reel-clients, .reel-service { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); margin: 0; font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: 400; letter-spacing: 0; text-shadow: 0 0 14px rgba(0, 0, 0, .3); }
 .reel-clients { left: 19.5vw; padding: 0; list-style: none; }
-.reel-client { display: block; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; font: inherit; font-size: clamp(11px, .72vw, 15px); line-height: 1.25; text-align: left; transition: color .25s ease, font-size .25s ease; }
-.reel-client.is-active { color: var(--accent); font-size: clamp(15px, 1.05vw, 21px); }
-.reel-service { right: 14vw; max-width: 34vw; color: var(--accent); font-size: clamp(15px, 1.05vw, 21px); line-height: 1.2; text-align: right; }
-/* HANS logo top centre (the SVG used as a mask so it takes the accent colour) and Contact bottom centre. */
-.reel-logo { position: absolute; z-index: 2; top: 6.5svh; left: 50%; transform: translateX(-50%); width: clamp(120px, 14vw, 280px); aspect-ratio: 390 / 141; background: var(--accent); -webkit-mask: url("assets/hans-logo.svg") center / contain no-repeat; mask: url("assets/hans-logo.svg") center / contain no-repeat; }
+.reel-client { display: block; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; font: inherit; font-size: clamp(13px, .9vw, 18px); line-height: 1.25; text-align: left; transition: color .25s ease, font-size .25s ease; }
+.reel-client.is-active { color: var(--accent); font-size: clamp(18px, 1.3vw, 26px); }
+.reel-service { right: 14vw; max-width: 34vw; color: var(--accent); font-size: clamp(18px, 1.3vw, 26px); line-height: 1.2; text-align: right; }
+/* HANS logo top centre (the SVG used as a mask so its colour is set here) and Contact bottom centre. */
+.reel-logo { position: absolute; z-index: 2; top: 6.5svh; left: 50%; transform: translateX(-50%); width: clamp(96px, 10vw, 200px); aspect-ratio: 390 / 141; background: var(--text); -webkit-mask: url("assets/hans-logo.svg") center / contain no-repeat; mask: url("assets/hans-logo.svg") center / contain no-repeat; }
 .reel-logo:hover { opacity: 1; }
-.reel-contact { position: absolute; z-index: 2; bottom: 6.5svh; left: 50%; transform: translateX(-50%); color: var(--accent); font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: 400; font-size: clamp(13px, 1.05vw, 20px); letter-spacing: 0; text-transform: uppercase; }
+.reel-contact { position: absolute; z-index: 2; bottom: 6.5svh; left: 50%; transform: translateX(-50%); color: var(--accent); font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: 400; font-size: clamp(16px, 1.3vw, 26px); letter-spacing: 0; text-transform: uppercase; }
 .reel-contact:hover { opacity: .7; }
 .reel-client:focus-visible, .reel-open:focus-visible, .reel-logo:focus-visible, .reel-contact:focus-visible { outline: 2px solid #fff; outline-offset: -6px; }
 .video-modal-close:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
@@ -82,8 +82,8 @@ button { color: inherit; font: inherit; }
 
 @media (max-width: 760px) {
   :root { --page-x: 10px; }
-  .reel-logo { width: 34vw; top: 5svh; }
-  .reel-contact { bottom: 5svh; font-size: 14px; }
+  .reel-logo { width: 26vw; top: 5svh; }
+  .reel-contact { bottom: 5svh; font-size: 17px; }
   .reel { --step: 60svh; }
   .reel-clients { left: 7vw; }
   .reel-service { top: auto; bottom: 13svh; left: 7vw; right: 7vw; max-width: none; transform: none; text-align: left; }
