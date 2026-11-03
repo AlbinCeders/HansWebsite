@@ -26,7 +26,7 @@ const setActive = (index) => {
 };
 
 workRows.forEach((row, i) => {
-  row.addEventListener('mouseenter', () => setActive(i));
+  row.querySelectorAll('span').forEach((text) => text.addEventListener('mouseenter', () => setActive(i)));
   row.addEventListener('focus', () => setActive(i));
 });
 setActive(0);

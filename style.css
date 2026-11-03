@@ -40,27 +40,29 @@ button { color: inherit; font: inherit; }
 .reel-media { transition: opacity .45s ease; }
 .reel-video { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .45s ease; }
 .reel-video.is-active { opacity: 1; }
-.reel:has(.work-row:hover, .work-row:focus-visible) .reel-media { opacity: .32; }
+.reel:has(.work-row span:hover, .work-row:focus-visible) .reel-media { opacity: .45; }
 
-/* HANS logo top centre (the SVG used as a mask so its colour is set here) and Contact bottom centre. */
+/* HANS logo top centre (the SVG used as a mask so its colour is set here). */
 .reel-logo { position: absolute; z-index: 2; top: 6.5svh; left: 50%; transform: translateX(-50%); width: clamp(96px, 10vw, 200px); aspect-ratio: 390 / 141; background: var(--text); -webkit-mask: url("assets/hans-logo.svg") center / contain no-repeat; mask: url("assets/hans-logo.svg") center / contain no-repeat; }
 .reel-logo:hover { opacity: 1; }
-.reel-contact { position: absolute; z-index: 2; bottom: 6.5svh; left: 50%; transform: translateX(-50%); color: var(--accent); font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(16px, 1.3vw, 26px); letter-spacing: 0; text-transform: uppercase; }
-.reel-contact:hover { opacity: .7; }
 
 /* Work list: two columns, Client and Service. */
-.work-table { position: absolute; z-index: 2; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 5.1vw; pointer-events: none; }
-.work-head, .work-row { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2vw; }
+.work-table { position: absolute; z-index: 2; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 5.1vw; pointer-events: none; }
+/* A centred block; both columns stay left-aligned inside it so the rows line up. */
+.work-head, .work-list { width: min(100%, clamp(520px, 52vw, 1040px)); }
+.work-head, .work-row { display: grid; grid-template-columns: 2fr 3fr; column-gap: 3vw; }
 .work-head { margin-bottom: clamp(14px, 2.2svh, 32px); font-family: Arial, Helvetica, sans-serif; font-size: clamp(10px, .7vw, 13px); font-weight: 400; letter-spacing: .01em; opacity: .75; transition: color .3s ease; }
 .work-list { margin: 0; padding: 0; list-style: none; pointer-events: auto; }
-.work-row { width: 100%; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; text-align: left; font-family: var(--serif); font-size: clamp(18px, 2.05vw, 42px); font-weight: 400; line-height: 1.5; letter-spacing: 0; text-shadow: 0 0 18px rgba(0, 0, 0, .18); transition: color .3s ease, opacity .3s ease, text-shadow .3s ease; }
-.work-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.work-row { width: 100%; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; text-align: left; font-family: var(--serif); font-size: clamp(16px, 1.45vw, 30px); font-weight: 400; line-height: 1.5; letter-spacing: 0; text-shadow: 0 0 18px rgba(0, 0, 0, .18); transition: color .3s ease, opacity .3s ease, text-shadow .3s ease; }
+.work-row span { justify-self: start; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; pointer-events: auto; }
+/* Only the text itself reacts: the gaps between and after the words do nothing. */
+.work-row { pointer-events: none; }
 /* While a row is hovered: the film fades back, the other rows turn dark grey, the hovered row goes red italic. */
-.reel:has(.work-row:hover, .work-row:focus-visible) .work-row { color: var(--text); opacity: .38; text-shadow: none; }
-.reel:has(.work-row:hover, .work-row:focus-visible) .work-head { color: var(--text); }
-.reel .work-row:hover, .reel .work-row:focus-visible { color: var(--accent) !important; opacity: 1 !important; font-style: italic; outline: none; }
+.reel:has(.work-row span:hover, .work-row:focus-visible) .work-row { color: var(--text); opacity: .38; text-shadow: none; }
+.reel:has(.work-row span:hover, .work-row:focus-visible) .work-head { color: var(--text); }
+.reel .work-row:has(span:hover), .reel .work-row:focus-visible { color: var(--accent) !important; opacity: 1 !important; font-style: italic; outline: none; }
 
-.reel-logo:focus-visible, .reel-contact:focus-visible { outline: 2px solid var(--text); outline-offset: 6px; }
+.reel-logo:focus-visible { outline: 2px solid var(--text); outline-offset: 6px; }
 .video-modal-close:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -93,10 +95,10 @@ button { color: inherit; font: inherit; }
 @media (max-width: 760px) {
   :root { --page-x: 10px; }
   .reel-logo { width: 26vw; top: 5svh; }
-  .reel-contact { bottom: 5svh; font-size: 17px; }
-  .work-table { padding: 0 5vw; }
+    .work-table { padding: 0 5vw; }
   .work-head, .work-row { grid-template-columns: 1fr 1.4fr; column-gap: 4vw; }
-  .work-row { font-size: 17px; line-height: 1.6; }
+  .work-head, .work-list { width: 100%; }
+  .work-row { font-size: 16px; line-height: 1.6; }
   .work-row span { white-space: normal; }
   /* Mobile: logo sits above the text, full width, text below it. */
   .info-section { grid-template-columns: 1fr; row-gap: 28px; min-height: calc(100svh - 44px); padding: 22svh 5vw 70px; }
