@@ -52,7 +52,7 @@ button { color: inherit; font: inherit; }
 
 /* Work list: two columns, Client and Service. */
 .work-table { position: absolute; z-index: 2; display: flex; flex-direction: column; padding: clamp(14px, 1.5vw, 30px) clamp(14px, 1.35vw, 28px); pointer-events: none; }
-.work-head, .work-row { display: grid; grid-template-columns: 46fr 54fr; column-gap: 2vw; }
+.work-head, .work-row { display: grid; grid-template-columns: 38fr 62fr; column-gap: 2vw; }
 .work-head { margin-bottom: clamp(14px, 2.4svh, 34px); font-family: Arial, Helvetica, sans-serif; font-size: clamp(10px, .7vw, 13px); font-weight: 400; letter-spacing: .01em; opacity: .75; transition: color .3s ease; }
 .work-list { margin: 0; padding: 0; list-style: none; }
 .work-row { width: 100%; padding: 0; border: 0; background: none; color: var(--text); cursor: pointer; text-align: left; font-family: var(--serif); font-size: clamp(15px, 1.35vw, 28px); font-weight: 400; line-height: 1.6; letter-spacing: 0; transition: color .3s ease, opacity .3s ease; }
@@ -73,12 +73,16 @@ button { color: inherit; font: inherit; }
 .info-section { display: grid; grid-template-columns: 1fr 1fr; align-content: start; column-gap: 3vw; min-height: calc(100svh - 48px); padding: 30svh 5.1vw 80px; }
 .about-logo { grid-column: 1; align-self: stretch; justify-self: stretch; width: 100%; max-width: none; height: 100%; object-fit: contain; object-position: right center; padding-right: 2vw; }
 .about-content { grid-column: 2; align-self: start; max-width: 560px; font-family: var(--font-inter); font-size: clamp(16px, 1.05vw, 21px); font-weight: 900; line-height: 1.04; letter-spacing: -.03em; }
-.about-content { display: flex; flex-direction: column; gap: 1.04em; }
+.about-content { display: flex; flex-direction: column; gap: .8em; }
 .about-content p { margin: 0; }
 .about-content a { text-decoration: none; }
-.site-footer { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 14px 5.1vw 20px; font-size: 11px; }
-.site-footer p { margin: 0 0 3px; }
-.footer-right { display: flex; gap: 15px; align-items: flex-start; }
+/* Footer stays on screen on the whole page: email left, About/Work centre, © right. */
+.site-footer { position: fixed; inset: auto 0 0; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 24px; padding: 14px 5.1vw 20px; font-size: 11px; }
+.footer-toggle { justify-self: center; }
+.footer-right { justify-self: end; }
+.site-footer a { transition: color .18s ease; }
+@media (hover: hover) { .site-footer a:hover { opacity: 1; color: var(--accent); } }
+.site-footer a:focus-visible { color: var(--accent); }
 
 .video-modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 5vw; background: rgba(0, 0, 0, .94); }
 .video-modal[hidden] { display: none; }
@@ -110,11 +114,11 @@ button { color: inherit; font: inherit; }
   .video-modal-close { top: 12px; right: 14px; }
 }
 
-/* Desktop: the text block is exactly as tall as the HANS logo. First line's cap-height sits on the logo's top edge, last line's baseline on its bottom edge.
-   Spare height is shared evenly between the five text groups. The -.157em trims Inter's built-in space above/below a line (line-height 1.04). */
+/* Desktop: the text block is centred vertically on the HANS logo.
+   The -.157em trims Inter's built-in space above/below a line (line-height 1.04). */
 @media (min-width: 761px) {
-  .about-logo { align-self: start; height: auto; }
-  .about-content { align-self: stretch; justify-content: space-between; gap: .5em; }
+  .about-logo { align-self: center; height: auto; }
+  .about-content { align-self: center; gap: 1.2em; }
   .about-content p:first-child { margin-top: -.157em; }
   .about-content p:last-child { margin-bottom: -.157em; }
 }

@@ -41,6 +41,19 @@ workRows.forEach((row, i) => {
 // The first film starts loading in the background so the first hover is quick.
 reelVideos[0].preload = 'auto';
 
+/* ---------- Footer: About / Work ---------- */
+/* Shows "About" (to the info section) while the work list is on screen,
+   and "Work" (back up to the list) once the info section is in view. */
+const footerToggle = document.querySelector('[data-footer-toggle]');
+const infoSection = document.getElementById('info');
+if (footerToggle && infoSection && 'IntersectionObserver' in window) {
+  new IntersectionObserver(([entry]) => {
+    const atInfo = entry.isIntersecting;
+    footerToggle.textContent = atInfo ? 'Work' : 'About';
+    footerToggle.setAttribute('href', atInfo ? '#work' : '#info');
+  }, { threshold: 0.5 }).observe(infoSection);
+}
+
 /* ---------- Video modal ---------- */
 const modal = document.querySelector('[data-video-modal]');
 const modalPlayer = document.querySelector('[data-video-modal-player]');
