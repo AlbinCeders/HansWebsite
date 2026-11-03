@@ -1,45 +1,45 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
 /* ---------- Work list ---------- */
-/* Hovering (or tabbing to) a row shows that project's film full screen behind the list.
-   The film keeps playing after the pointer leaves, until another row is hovered. */
+/* The page is white by default. Hovering (or tabbing to) the text of a row fades that project's
+   film in full screen behind the list; leaving the text fades it out again and pauses it. */
 const reel = document.querySelector('.reel');
 const reelVideos = [...document.querySelectorAll('.reel-video')];
 const workRows = [...document.querySelectorAll('.work-row')];
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let activeIndex = -1;
-let reelVisible = true;
+let pauseTimer = null;
 
-const setActive = (index) => {
-  if (index === activeIndex) return;
+const showFilm = (index) => {
+  clearTimeout(pauseTimer);
   activeIndex = index;
   reelVideos.forEach((video, i) => {
     const on = i === index;
     video.classList.toggle('is-active', on);
     if (on) {
       video.preload = 'auto';
-      if (reelVisible && !reduceMotion.matches) video.play().catch(() => {});
+      if (!reduceMotion.matches) video.play().catch(() => {});
     } else if (!video.paused) {
       video.pause();
     }
   });
 };
+// Pause once the fade-out has finished, so nothing plays behind a white page.
+const hideFilm = () => {
+  clearTimeout(pauseTimer);
+  pauseTimer = setTimeout(() => reelVideos[activeIndex]?.pause(), 600);
+};
 
 workRows.forEach((row, i) => {
-  row.querySelectorAll('span').forEach((text) => text.addEventListener('mouseenter', () => setActive(i)));
-  row.addEventListener('focus', () => setActive(i));
+  row.querySelectorAll('span').forEach((text) => {
+    text.addEventListener('mouseenter', () => showFilm(i));
+    text.addEventListener('mouseleave', hideFilm);
+  });
+  row.addEventListener('focus', () => showFilm(i));
+  row.addEventListener('blur', hideFilm);
 });
-setActive(0);
-
-// Pause the background film when the work section is scrolled out of view.
-if ('IntersectionObserver' in window) {
-  new IntersectionObserver(([entry]) => {
-    reelVisible = entry.isIntersecting;
-    const video = reelVideos[activeIndex];
-    if (reelVisible && !reduceMotion.matches) video.play().catch(() => {});
-    else video.pause();
-  }).observe(reel);
-}
+// The first film starts loading in the background so the first hover is quick.
+reelVideos[0].preload = 'auto';
 
 /* ---------- Video modal ---------- */
 const modal = document.querySelector('[data-video-modal]');

@@ -32,12 +32,12 @@ button { color: inherit; font: inherit; }
 
 #info { scroll-margin-top: 0; }
 
-/* Work: one full screen. The active project's film plays in the background, the work list sits on top.
-   Hovering a row switches the film (script.js), turns that row red and fades the film back. */
+/* Work: one full white screen with the work list. Hovering a row's text fades that project's film
+   in behind the list (script.js picks the film), turns the row red and greys the others. */
 :root { --serif: "EB Garamond", "Times New Roman", Times, serif; }
-.reel { position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: var(--bg); color: #fff; }
+.reel { position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: var(--bg); color: var(--text); }
 .reel-media, .reel-video { position: absolute; inset: 0; }
-.reel-media { transition: opacity .45s ease; }
+.reel-media { opacity: 0; transition: opacity .45s ease; }
 .reel-video { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .45s ease; }
 .reel-video.is-active { opacity: 1; }
 .reel:has(.work-row span:hover, .work-row:focus-visible) .reel-media { opacity: .45; }
@@ -55,13 +55,12 @@ button { color: inherit; font: inherit; }
 .work-head, .work-row { display: grid; grid-template-columns: 46fr 54fr; column-gap: 2vw; }
 .work-head { margin-bottom: clamp(14px, 2.4svh, 34px); font-family: Arial, Helvetica, sans-serif; font-size: clamp(10px, .7vw, 13px); font-weight: 400; letter-spacing: .01em; opacity: .75; transition: color .3s ease; }
 .work-list { margin: 0; padding: 0; list-style: none; }
-.work-row { width: 100%; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; text-align: left; font-family: var(--serif); font-size: clamp(15px, 1.35vw, 28px); font-weight: 400; line-height: 1.6; letter-spacing: 0; text-shadow: 0 0 18px rgba(0, 0, 0, .18); transition: color .3s ease, opacity .3s ease, text-shadow .3s ease; }
+.work-row { width: 100%; padding: 0; border: 0; background: none; color: var(--text); cursor: pointer; text-align: left; font-family: var(--serif); font-size: clamp(15px, 1.35vw, 28px); font-weight: 400; line-height: 1.6; letter-spacing: 0; transition: color .3s ease, opacity .3s ease; }
 .work-row span { justify-self: start; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; pointer-events: auto; }
 /* Only the text itself reacts: the gaps between and after the words do nothing. */
 .work-row { pointer-events: none; }
-/* While a row is hovered: the film fades back, the other rows turn dark grey, the hovered row goes red italic. */
-.reel:has(.work-row span:hover, .work-row:focus-visible) .work-row { color: var(--text); opacity: .38; text-shadow: none; }
-.reel:has(.work-row span:hover, .work-row:focus-visible) .work-head { color: var(--text); }
+/* While a row is hovered: the film fades in, the other rows turn grey, the hovered row goes red italic. */
+.reel:has(.work-row span:hover, .work-row:focus-visible) .work-row { opacity: .38; }
 .reel .work-row:has(span:hover), .reel .work-row:focus-visible { color: var(--accent) !important; opacity: 1 !important; font-style: italic; outline: none; }
 
 .reel-logo-box:focus-visible { outline: 2px solid var(--text); outline-offset: 4px; }
