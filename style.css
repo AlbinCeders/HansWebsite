@@ -42,18 +42,20 @@ button { color: inherit; font: inherit; }
 .reel-video.is-active { opacity: 1; }
 .reel:has(.work-row span:hover, .work-row:focus-visible) .reel-media { opacity: .45; }
 
-/* HANS logo top centre (the SVG used as a mask so its colour is set here). */
-.reel-logo { position: absolute; z-index: 2; top: 6.5svh; left: 50%; transform: translateX(-50%); width: clamp(96px, 10vw, 200px); aspect-ratio: 390 / 141; background: var(--text); -webkit-mask: url("assets/hans-logo.svg") center / contain no-repeat; mask: url("assets/hans-logo.svg") center / contain no-repeat; }
-.reel-logo:hover { opacity: 1; }
+/* Placement over the film (% of the screen, from the layout sketch): logo to the left, list to the right of centre. */
+.pos-logo { left: 15.7%; top: 45.2%; width: 10.8%; height: 9.3%; }
+.pos-list { left: 38.2%; top: 25.8%; width: 49.9%; height: 48.1%; }
+
+.reel-logo-box { position: absolute; z-index: 3; display: grid; place-items: center; }
+.reel-logo-box:hover { opacity: 1; }
+.reel-logo { display: block; width: 86%; aspect-ratio: 390 / 141; background: var(--text); -webkit-mask: url("assets/hans-logo.svg") center / contain no-repeat; mask: url("assets/hans-logo.svg") center / contain no-repeat; }
 
 /* Work list: two columns, Client and Service. */
-.work-table { position: absolute; z-index: 2; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 5.1vw; pointer-events: none; }
-/* A centred block; both columns stay left-aligned inside it so the rows line up. */
-.work-head, .work-list { width: min(100%, clamp(520px, 52vw, 1040px)); }
-.work-head, .work-row { display: grid; grid-template-columns: 2fr 3fr; column-gap: 3vw; }
-.work-head { margin-bottom: clamp(14px, 2.2svh, 32px); font-family: Arial, Helvetica, sans-serif; font-size: clamp(10px, .7vw, 13px); font-weight: 400; letter-spacing: .01em; opacity: .75; transition: color .3s ease; }
-.work-list { margin: 0; padding: 0; list-style: none; pointer-events: auto; }
-.work-row { width: 100%; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; text-align: left; font-family: var(--serif); font-size: clamp(16px, 1.45vw, 30px); font-weight: 400; line-height: 1.5; letter-spacing: 0; text-shadow: 0 0 18px rgba(0, 0, 0, .18); transition: color .3s ease, opacity .3s ease, text-shadow .3s ease; }
+.work-table { position: absolute; z-index: 2; display: flex; flex-direction: column; padding: clamp(14px, 1.5vw, 30px) clamp(14px, 1.35vw, 28px); pointer-events: none; }
+.work-head, .work-row { display: grid; grid-template-columns: 46fr 54fr; column-gap: 2vw; }
+.work-head { margin-bottom: clamp(14px, 2.4svh, 34px); font-family: Arial, Helvetica, sans-serif; font-size: clamp(10px, .7vw, 13px); font-weight: 400; letter-spacing: .01em; opacity: .75; transition: color .3s ease; }
+.work-list { margin: 0; padding: 0; list-style: none; }
+.work-row { width: 100%; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; text-align: left; font-family: var(--serif); font-size: clamp(15px, 1.35vw, 28px); font-weight: 400; line-height: 1.6; letter-spacing: 0; text-shadow: 0 0 18px rgba(0, 0, 0, .18); transition: color .3s ease, opacity .3s ease, text-shadow .3s ease; }
 .work-row span { justify-self: start; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; pointer-events: auto; }
 /* Only the text itself reacts: the gaps between and after the words do nothing. */
 .work-row { pointer-events: none; }
@@ -62,7 +64,7 @@ button { color: inherit; font: inherit; }
 .reel:has(.work-row span:hover, .work-row:focus-visible) .work-head { color: var(--text); }
 .reel .work-row:has(span:hover), .reel .work-row:focus-visible { color: var(--accent) !important; opacity: 1 !important; font-style: italic; outline: none; }
 
-.reel-logo:focus-visible { outline: 2px solid var(--text); outline-offset: 6px; }
+.reel-logo-box:focus-visible { outline: 2px solid var(--text); outline-offset: 4px; }
 .video-modal-close:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -94,10 +96,10 @@ button { color: inherit; font: inherit; }
 
 @media (max-width: 760px) {
   :root { --page-x: 10px; }
-  .reel-logo { width: 26vw; top: 5svh; }
-    .work-table { padding: 0 5vw; }
+  /* Mobile: logo on top, list full width below it. */
+  .pos-logo { left: 30%; top: 8%; width: 40%; height: 8%; }
+  .pos-list { left: 4%; top: 30%; width: 92%; height: 46%; }
   .work-head, .work-row { grid-template-columns: 1fr 1.4fr; column-gap: 4vw; }
-  .work-head, .work-list { width: 100%; }
   .work-row { font-size: 16px; line-height: 1.6; }
   .work-row span { white-space: normal; }
   /* Mobile: logo sits above the text, full width, text below it. */
@@ -118,10 +120,9 @@ button { color: inherit; font: inherit; }
   .about-content p:last-child { margin-bottom: -.157em; }
 }
 
-/* Red accent on hover for the info text. */
-.about-content p, .about-content span, .about-content a { transition: color .18s ease; }
+/* Info text: only the email address turns red on hover. */
+.about-content a { transition: color .18s ease; }
 @media (hover: hover) {
-  .about-content p:not(:has(span)):hover, .about-content span:hover { color: var(--accent); }
   .about-content a:hover { opacity: 1; color: var(--accent); }
 }
 .about-content a:focus-visible { color: var(--accent); }
