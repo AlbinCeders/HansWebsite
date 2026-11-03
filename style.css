@@ -32,25 +32,35 @@ button { color: inherit; font: inherit; }
 
 #info { scroll-margin-top: 0; }
 
-/* Work reel: a full-screen preview pinned to the screen while the page scrolls.
-   Each project gets --step of scroll; script.js picks the active one from the scroll position. */
-.reel { --step: 70svh; --view: 100svh; position: relative; height: calc(var(--n) * var(--step) + var(--view)); }
-.reel-sticky { position: sticky; top: 0; height: var(--view); overflow: hidden; background: #111; color: #fff; }
-.reel-media, .reel-video, .reel-open { position: absolute; inset: 0; }
-.reel-video { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+/* Work: one full screen. The active project's film plays in the background, the work list sits on top.
+   Hovering a row switches the film (script.js), turns that row red and fades the film back. */
+:root { --serif: "EB Garamond", "Times New Roman", Times, serif; }
+.reel { position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: var(--bg); color: #fff; }
+.reel-media, .reel-video { position: absolute; inset: 0; }
+.reel-media { transition: opacity .45s ease; }
+.reel-video { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .45s ease; }
 .reel-video.is-active { opacity: 1; }
-.reel-open { z-index: 1; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
-.reel-clients, .reel-service { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); margin: 0; font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: 400; letter-spacing: 0; text-shadow: 0 0 14px rgba(0, 0, 0, .3); }
-.reel-clients { left: 19.5vw; padding: 0; list-style: none; }
-.reel-client { display: block; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; font: inherit; font-size: clamp(13px, .9vw, 18px); line-height: 1.25; text-align: left; transition: color .25s ease, font-size .25s ease; }
-.reel-client.is-active { color: var(--accent); font-size: clamp(18px, 1.3vw, 26px); }
-.reel-service { right: 14vw; max-width: 34vw; color: var(--accent); font-size: clamp(18px, 1.3vw, 26px); line-height: 1.2; text-align: right; }
+.reel:has(.work-row:hover, .work-row:focus-visible) .reel-media { opacity: .32; }
+
 /* HANS logo top centre (the SVG used as a mask so its colour is set here) and Contact bottom centre. */
 .reel-logo { position: absolute; z-index: 2; top: 6.5svh; left: 50%; transform: translateX(-50%); width: clamp(96px, 10vw, 200px); aspect-ratio: 390 / 141; background: var(--text); -webkit-mask: url("assets/hans-logo.svg") center / contain no-repeat; mask: url("assets/hans-logo.svg") center / contain no-repeat; }
 .reel-logo:hover { opacity: 1; }
-.reel-contact { position: absolute; z-index: 2; bottom: 6.5svh; left: 50%; transform: translateX(-50%); color: var(--accent); font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: 400; font-size: clamp(16px, 1.3vw, 26px); letter-spacing: 0; text-transform: uppercase; }
+.reel-contact { position: absolute; z-index: 2; bottom: 6.5svh; left: 50%; transform: translateX(-50%); color: var(--accent); font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(16px, 1.3vw, 26px); letter-spacing: 0; text-transform: uppercase; }
 .reel-contact:hover { opacity: .7; }
-.reel-client:focus-visible, .reel-open:focus-visible, .reel-logo:focus-visible, .reel-contact:focus-visible { outline: 2px solid #fff; outline-offset: -6px; }
+
+/* Work list: two columns, Client and Service. */
+.work-table { position: absolute; z-index: 2; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 5.1vw; pointer-events: none; }
+.work-head, .work-row { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2vw; }
+.work-head { margin-bottom: clamp(14px, 2.2svh, 32px); font-family: Arial, Helvetica, sans-serif; font-size: clamp(10px, .7vw, 13px); font-weight: 400; letter-spacing: .01em; opacity: .75; transition: color .3s ease; }
+.work-list { margin: 0; padding: 0; list-style: none; pointer-events: auto; }
+.work-row { width: 100%; padding: 0; border: 0; background: none; color: #fff; cursor: pointer; text-align: left; font-family: var(--serif); font-size: clamp(18px, 2.05vw, 42px); font-weight: 400; line-height: 1.5; letter-spacing: 0; text-shadow: 0 0 18px rgba(0, 0, 0, .18); transition: color .3s ease, opacity .3s ease, text-shadow .3s ease; }
+.work-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* While a row is hovered: the film fades back, the other rows turn dark grey, the hovered row goes red italic. */
+.reel:has(.work-row:hover, .work-row:focus-visible) .work-row { color: var(--text); opacity: .38; text-shadow: none; }
+.reel:has(.work-row:hover, .work-row:focus-visible) .work-head { color: var(--text); }
+.reel .work-row:hover, .reel .work-row:focus-visible { color: var(--accent) !important; opacity: 1 !important; font-style: italic; outline: none; }
+
+.reel-logo:focus-visible, .reel-contact:focus-visible { outline: 2px solid var(--text); outline-offset: 6px; }
 .video-modal-close:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -84,9 +94,10 @@ button { color: inherit; font: inherit; }
   :root { --page-x: 10px; }
   .reel-logo { width: 26vw; top: 5svh; }
   .reel-contact { bottom: 5svh; font-size: 17px; }
-  .reel { --step: 60svh; }
-  .reel-clients { left: 7vw; }
-  .reel-service { top: auto; bottom: 13svh; left: 7vw; right: 7vw; max-width: none; transform: none; text-align: left; }
+  .work-table { padding: 0 5vw; }
+  .work-head, .work-row { grid-template-columns: 1fr 1.4fr; column-gap: 4vw; }
+  .work-row { font-size: 17px; line-height: 1.6; }
+  .work-row span { white-space: normal; }
   /* Mobile: logo sits above the text, full width, text below it. */
   .info-section { grid-template-columns: 1fr; row-gap: 28px; min-height: calc(100svh - 44px); padding: 22svh 5vw 70px; }
   .about-logo { grid-column: 1; align-self: start; height: auto; padding-right: 0; object-position: left center; }

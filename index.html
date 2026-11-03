@@ -12,40 +12,60 @@
   <!-- TODO: add og:image and og:url once the domain is live -->
   <title>HANS</title>
   <link rel="icon" type="image/png" href="assets/hans-cursor.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <main id="top">
-    <section id="work" class="reel" style="--n:9" aria-label="Selected work">
-      <div class="reel-sticky">
-        <div class="reel-media">
-          <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/hm.mp4"></video>
-          <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/vasttrafik.mp4"></video>
-          <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/svenskafreds.mp4"></video>
-          <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/siemens.mp4"></video>
-          <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/stryktipset.mp4"></video>
-          <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/stadium.mp4"></video>
-          <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/granini.mp4"></video>
-          <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/kia.mp4"></video>
-          <video class="reel-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/work/waybler.mp4"></video>
-        </div>
-        <a class="reel-logo" href="#info" aria-label="HANS – info"></a>
-        <a class="reel-contact" href="#contact">Contact</a>
-        <button class="reel-open" type="button" aria-label="Watch H&amp;M Home" data-reel-open></button>
-        <ol class="reel-clients" aria-label="Clients">
-          <li><button class="reel-client" type="button" data-index="0" data-name="H&amp;M Home" data-brand="H&amp;M Home" data-role="Sound Design and Mix" data-video-src="assets/work/hm.mp4" data-note="Made during employment at Studio Smile">H&amp;M Home</button></li>
-          <li><button class="reel-client" type="button" data-index="1" data-name="Västtrafik" data-brand="Västtrafik" data-role="Sound Design &amp; Sound Mix" data-video-src="assets/work/vasttrafik.mp4" data-note="Made during employment at Studio Smile">Västtrafik</button></li>
-          <li><button class="reel-client" type="button" data-index="2" data-name="Svenska Freds" data-brand="Svenska Freds" data-role="Sound Design and Mix" data-video-src="assets/work/svenskafreds.mp4" data-note="Made during employment at Studio Smile">Svenska Freds</button></li>
-          <li><button class="reel-client" type="button" data-index="3" data-name="Siemens" data-brand="Siemens" data-role="Sound Mix" data-video-src="assets/work/siemens.mp4" data-note="Made during employment at Studio Smile">Siemens</button></li>
-          <li><button class="reel-client" type="button" data-index="4" data-name="Stryktipset" data-brand="Stryktipset" data-role="Sound Mix" data-video-src="assets/work/stryktipset.mp4" data-note="Made during employment at Studio Smile">Stryktipset</button></li>
-          <li><button class="reel-client" type="button" data-index="5" data-name="Stadium" data-brand="Stadium" data-role="Music Production, Sound Design and Mix" data-video-src="assets/work/stadium.mp4" data-note="Made during employment at Studio Smile">Stadium</button></li>
-          <li><button class="reel-client" type="button" data-index="6" data-name="Granini" data-brand="Granini" data-role="Sound Mix" data-video-src="assets/work/granini.mp4" data-note="Made during employment at Studio Smile">Granini</button></li>
-          <li><button class="reel-client" type="button" data-index="7" data-name="KIA" data-brand="KIA" data-role="Sound Mix" data-video-src="assets/work/kia.mp4" data-note="Made during employment at Studio Smile">KIA</button></li>
-          <li><button class="reel-client" type="button" data-index="8" data-name="Waybler" data-brand="Waybler" data-role="Sound Logo" data-video-src="assets/work/waybler.mp4" data-note="Made during employment at Studio Smile">Waybler</button></li>
-        </ol>
-        <p class="reel-service" aria-live="polite" data-reel-service>Sound Design and Mix</p>
+    <section id="work" class="reel" aria-label="Selected work">
+      <div class="reel-media">
+        <video class="reel-video" muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1" src="assets/work/hm.mp4"></video>
+        <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" src="assets/work/vasttrafik.mp4"></video>
+        <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" src="assets/work/svenskafreds.mp4"></video>
+        <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" src="assets/work/siemens.mp4"></video>
+        <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" src="assets/work/stryktipset.mp4"></video>
+        <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" src="assets/work/stadium.mp4"></video>
+        <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" src="assets/work/granini.mp4"></video>
+        <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" src="assets/work/kia.mp4"></video>
+        <video class="reel-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" src="assets/work/waybler.mp4"></video>
       </div>
+      <a class="reel-logo" href="#info" aria-label="HANS – info"></a>
+      <div class="work-table">
+        <div class="work-head" aria-hidden="true"><span>Client</span><span>Service</span></div>
+        <ol class="work-list" aria-label="Selected work">
+          <li><button class="work-row" type="button" data-index="0" data-name="H&amp;M Home" data-brand="H&amp;M Home" data-role="Sound Design and Mix" data-video-src="assets/work/hm.mp4" data-note="Made during employment at Studio Smile" aria-label="Watch H&amp;M Home">
+            <span>H&amp;M Home</span><span>Sound Design and Mix</span>
+          </button></li>
+          <li><button class="work-row" type="button" data-index="1" data-name="Västtrafik" data-brand="Västtrafik" data-role="Sound Design &amp; Sound Mix" data-video-src="assets/work/vasttrafik.mp4" data-note="Made during employment at Studio Smile" aria-label="Watch Västtrafik">
+            <span>Västtrafik</span><span>Sound Design &amp; Sound Mix</span>
+          </button></li>
+          <li><button class="work-row" type="button" data-index="2" data-name="Svenska Freds" data-brand="Svenska Freds" data-role="Sound Design and Mix" data-video-src="assets/work/svenskafreds.mp4" data-note="Made during employment at Studio Smile" aria-label="Watch Svenska Freds">
+            <span>Svenska Freds</span><span>Sound Design and Mix</span>
+          </button></li>
+          <li><button class="work-row" type="button" data-index="3" data-name="Siemens" data-brand="Siemens" data-role="Sound Mix" data-video-src="assets/work/siemens.mp4" data-note="Made during employment at Studio Smile" aria-label="Watch Siemens">
+            <span>Siemens</span><span>Sound Mix</span>
+          </button></li>
+          <li><button class="work-row" type="button" data-index="4" data-name="Stryktipset" data-brand="Stryktipset" data-role="Sound Mix" data-video-src="assets/work/stryktipset.mp4" data-note="Made during employment at Studio Smile" aria-label="Watch Stryktipset">
+            <span>Stryktipset</span><span>Sound Mix</span>
+          </button></li>
+          <li><button class="work-row" type="button" data-index="5" data-name="Stadium" data-brand="Stadium" data-role="Music Production, Sound Design and Mix" data-video-src="assets/work/stadium.mp4" data-note="Made during employment at Studio Smile" aria-label="Watch Stadium">
+            <span>Stadium</span><span>Music Production, Sound Design and Mix</span>
+          </button></li>
+          <li><button class="work-row" type="button" data-index="6" data-name="Granini" data-brand="Granini" data-role="Sound Mix" data-video-src="assets/work/granini.mp4" data-note="Made during employment at Studio Smile" aria-label="Watch Granini">
+            <span>Granini</span><span>Sound Mix</span>
+          </button></li>
+          <li><button class="work-row" type="button" data-index="7" data-name="KIA" data-brand="KIA" data-role="Sound Mix" data-video-src="assets/work/kia.mp4" data-note="Made during employment at Studio Smile" aria-label="Watch KIA">
+            <span>KIA</span><span>Sound Mix</span>
+          </button></li>
+          <li><button class="work-row" type="button" data-index="8" data-name="Waybler" data-brand="Waybler" data-role="Sound Logo" data-video-src="assets/work/waybler.mp4" data-note="Made during employment at Studio Smile" aria-label="Watch Waybler">
+            <span>Waybler</span><span>Sound Logo</span>
+          </button></li>
+        </ol>
+      </div>
+      <a class="reel-contact" href="#contact">Contact</a>
     </section>
 
     <section id="info" class="info-section">

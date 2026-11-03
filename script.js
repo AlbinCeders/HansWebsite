@@ -1,28 +1,14 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ---------- Work reel ---------- */
-/* The reel section is taller than the screen; its inner part sticks to the screen.
-   Scroll position picks the active project: its preview fills the background,
-   its client name turns red and its service text shows on the right. */
+/* ---------- Work list ---------- */
+/* Hovering (or tabbing to) a row shows that project's film full screen behind the list.
+   The film keeps playing after the pointer leaves, until another row is hovered. */
 const reel = document.querySelector('.reel');
 const reelVideos = [...document.querySelectorAll('.reel-video')];
-const reelClients = [...document.querySelectorAll('.reel-client')];
-const reelOpen = document.querySelector('[data-reel-open]');
-const reelService = document.querySelector('[data-reel-service]');
+const workRows = [...document.querySelectorAll('.work-row')];
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let activeIndex = -1;
-
-// Load a video only when it is (or is about to be) on screen.
-const loadVideo = (video, preload) => {
-  if (!video) return;
-  if (!video.getAttribute('src')) video.src = video.dataset.src;
-  if (preload === 'auto') video.preload = 'auto';
-};
-
-const reelScrollRange = () => {
-  const sticky = reel.querySelector('.reel-sticky');
-  return Math.max(1, reel.offsetHeight - sticky.offsetHeight);
-};
+let reelVisible = true;
 
 const setActive = (index) => {
   if (index === activeIndex) return;
@@ -31,54 +17,29 @@ const setActive = (index) => {
     const on = i === index;
     video.classList.toggle('is-active', on);
     if (on) {
-      loadVideo(video, 'auto');
-      if (!reduceMotion.matches) video.play().catch(() => {});
+      video.preload = 'auto';
+      if (reelVisible && !reduceMotion.matches) video.play().catch(() => {});
     } else if (!video.paused) {
       video.pause();
     }
   });
-  loadVideo(reelVideos[index + 1]); // warm up the next one
-  reelClients.forEach((client, i) => {
-    client.classList.toggle('is-active', i === index);
-    if (i === index) client.setAttribute('aria-current', 'true');
-    else client.removeAttribute('aria-current');
-  });
-  const d = reelClients[index].dataset;
-  reelService.textContent = d.role || '';
-  reelOpen.setAttribute('aria-label', `Watch ${reelClients[index].textContent}`);
 };
 
-let reelTicking = false;
-const updateReel = () => {
-  reelTicking = false;
-  const scrolled = -reel.getBoundingClientRect().top;
-  const step = reelScrollRange() / reelClients.length;
-  const index = Math.min(reelClients.length - 1, Math.max(0, Math.floor(scrolled / step)));
-  setActive(index);
-};
-const requestReelUpdate = () => {
-  if (!reelTicking) { reelTicking = true; requestAnimationFrame(updateReel); }
-};
-window.addEventListener('scroll', requestReelUpdate, { passive: true });
-window.addEventListener('resize', requestReelUpdate);
-updateReel();
+workRows.forEach((row, i) => {
+  row.addEventListener('mouseenter', () => setActive(i));
+  row.addEventListener('focus', () => setActive(i));
+});
+setActive(0);
 
-// Pause the background video when the reel is scrolled out of view.
+// Pause the background film when the work section is scrolled out of view.
 if ('IntersectionObserver' in window) {
   new IntersectionObserver(([entry]) => {
+    reelVisible = entry.isIntersecting;
     const video = reelVideos[activeIndex];
-    if (!video) return;
-    if (entry.isIntersecting && !reduceMotion.matches) video.play().catch(() => {});
+    if (reelVisible && !reduceMotion.matches) video.play().catch(() => {});
     else video.pause();
-  }).observe(reel.querySelector('.reel-sticky'));
+  }).observe(reel);
 }
-
-// Clicking a client name scrolls to that project.
-reelClients.forEach((client, i) => client.addEventListener('click', () => {
-  const step = reelScrollRange() / reelClients.length;
-  const top = reel.getBoundingClientRect().top + window.scrollY + i * step + step * 0.1;
-  window.scrollTo({ top, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-}));
 
 /* ---------- Video modal ---------- */
 const modal = document.querySelector('[data-video-modal]');
@@ -114,12 +75,8 @@ const closeModal = () => {
   if (lastFocused) lastFocused.focus();
 };
 
-// Clicking the background opens the active project's full film with sound.
-reelOpen.addEventListener('click', () => {
-  const active = reelClients[activeIndex];
-  openModal(active.dataset.videoSrc, active);
-  lastFocused = reelOpen;
-});
+// Clicking a row opens that project's full film with sound.
+workRows.forEach((row) => row.addEventListener('click', () => openModal(row.dataset.videoSrc, row)));
 
 closeButton?.addEventListener('click', closeModal);
 modal?.addEventListener('click', (event) => {
